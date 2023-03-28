@@ -5,22 +5,20 @@ import Navigation from "../../components/Navigation";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Contacts = () => {
-  const [contacts, setContacts] = useState([]);
+const Types = () => {
+  const [types, setTypes] = useState([]);
   useEffect(() => {
-    displayContacts();
+    displayTypes();
   }, []);
   // Sans les crochets ça tourne en boucle
 
-  const displayContacts = async () => {
-    await axios.get("http://localhost:8000/api/contacts").then((res) => {
-      setContacts(res.data.data);
+  const displayTypes = async () => {
+    await axios.get("http://localhost:8000/api/types").then((res) => {
+      setTypes(res.data.data);
     });
   };
-  const deleteContact = (id) => {
-    axios
-      .delete(`http://localhost:8000/api/contacts/${id}`)
-      .then(displayContacts);
+  const deleteType = (id) => {
+    axios.delete(`http://localhost:8000/api/types/${id}`).then(displayTypes);
   };
 
   return (
@@ -30,23 +28,24 @@ const Contacts = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Email</th>
-              <th>Sujet</th>
-              <th>Contenus</th>
-              <th>Actions</th>
+              <th>Types</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact) => (
-              <tr key={contact.id}>
-                <td>{contact.email}</td>
-                <td>{contact.topic}</td>
-                <td>{contact.content}</td>
+            {types.map((type) => (
+              <tr key={type.id}>
+                <td>{type.nameType}</td>
                 <td>
+                  <Link
+                    to={`/types/edit/${type.id}`}
+                    className="btn btn-success me-2"
+                  >
+                    Edit
+                  </Link>
                   <Button
                     variant="danger"
                     onClick={() => {
-                      deleteContact(contact.id);
+                      deleteType(type.id);
                     }}
                   >
                     Supprimer
@@ -60,4 +59,4 @@ const Contacts = () => {
     </div>
   );
 };
-export default Contacts;
+export default Types;

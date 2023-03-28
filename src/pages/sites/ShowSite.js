@@ -5,20 +5,20 @@ import Navigation from "../../components/Navigation";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Sites = () => {
-  const [sites, setSites] = useState([]);
+const ShowSite = () => {
+  const [showSite, setShowSite] = useState([]);
   useEffect(() => {
-    displaySites();
+    displayShowSite();
   }, []);
   // Sans les crochets ça tourne en boucle
 
-  const displaySites = async () => {
-    await axios.get("http://localhost:8000/api/sites").then((res) => {
-      setSites(res.data.data);
+  const displayShowSite = async () => {
+    await axios.get("http://localhost:8000/api/sites/${id}").then((res) => {
+      setShowSite(res.data.data);
     });
   };
-  const deleteSite = (id) => {
-    axios.delete(`http://localhost:8000/api/sites/${id}`).then(displaySites);
+  const deleteShowSite = (id) => {
+    axios.delete(`http://localhost:8000/api/sites/${id}`).then(displayShowSite);
   };
 
   return (
@@ -28,22 +28,22 @@ const Sites = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Noms</th>
-              <th>Descriptions</th>
-              <th>Emails</th>
-              <th>Sites Internet</th>
-              <th>Téléphones</th>
-              <th>Adresses</th>
-              <th>Codes postaux</th>
-              <th>Villes</th>
-              <th>Longitudes</th>
-              <th>Latitudes</th>
-              <th>Photos</th>
+              <th>Nom</th>
+              <th>Description</th>
+              <th>Email</th>
+              <th>Site internet</th>
+              <th>Téléphone</th>
+              <th>Adresse</th>
+              <th>Code postal</th>
+              <th>Ville</th>
+              <th>longitude</th>
+              <th>latitude</th>
+              <th>Photo</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {sites.map((site) => (
+            {showSite.map((site) => (
               <tr key={site.id}>
                 <td>{site.nameSite}</td>
                 <td>{site.descriptionSite}</td>
@@ -54,8 +54,8 @@ const Sites = () => {
                 <td>{site.zipSite}</td>
                 <td>{site.citySite}</td>
                 <td>{site.longitudeDegSite}</td>
+                <td>{site.emailSite}</td>
                 <td>{site.latitudeDegSite}</td>
-                <td>{site.pictureSite}</td>
                 <td>
                   <img
                     src={`http://localhost:8000/storage/uploads/${site.pictureSite}`}
@@ -73,7 +73,7 @@ const Sites = () => {
                   <Button
                     variant="danger"
                     onClick={() => {
-                      deleteSite(site.id);
+                      deleteShowSite(site.id);
                     }}
                   >
                     Supprimer
@@ -87,4 +87,5 @@ const Sites = () => {
     </div>
   );
 };
-export default Sites;
+
+export default ShowSite;

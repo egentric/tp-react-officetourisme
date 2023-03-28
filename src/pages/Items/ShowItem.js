@@ -5,7 +5,7 @@ import Navigation from "../../components/Navigation";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const showItem = () => {
+const ShowItem = () => {
   const [showItem, setShowItem] = useState([]);
   useEffect(() => {
     displayShowItem();
@@ -74,4 +74,4 @@ const showItem = () => {
   );
 };
 
-export default showItem;
+export default ShowItem;

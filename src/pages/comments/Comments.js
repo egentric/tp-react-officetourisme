@@ -5,22 +5,22 @@ import Navigation from "../../components/Navigation";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Contacts = () => {
-  const [contacts, setContacts] = useState([]);
+const Comments = () => {
+  const [comments, setComments] = useState([]);
   useEffect(() => {
-    displayContacts();
+    displayComments();
   }, []);
   // Sans les crochets ça tourne en boucle
 
-  const displayContacts = async () => {
-    await axios.get("http://localhost:8000/api/contacts").then((res) => {
-      setContacts(res.data.data);
+  const displayComments = async () => {
+    await axios.get("http://localhost:8000/api/comments").then((res) => {
+      setComments(res.data.data);
     });
   };
-  const deleteContact = (id) => {
+  const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:8000/api/contacts/${id}`)
-      .then(displayContacts);
+      .delete(`http://localhost:8000/api/comments/${id}`)
+      .then(displayComments);
   };
 
   return (
@@ -30,23 +30,27 @@ const Contacts = () => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Email</th>
-              <th>Sujet</th>
-              <th>Contenus</th>
+              <th>Titres</th>
+              <th>Commentaires</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact) => (
-              <tr key={contact.id}>
-                <td>{contact.email}</td>
-                <td>{contact.topic}</td>
-                <td>{contact.content}</td>
+            {comments.map((comment) => (
+              <tr key={comment.id}>
+                <td>{comment.titleComment}</td>
+                <td>{comment.contentComment}</td>
                 <td>
+                  {/*   <Link
+                    to={`/comments/edit/${comment.id}`}
+                    className="btn btn-success me-2"
+                  >
+                    Edit
+                  </Link> */}
                   <Button
                     variant="danger"
                     onClick={() => {
-                      deleteContact(contact.id);
+                      deleteComment(comment.id);
                     }}
                   >
                     Supprimer
@@ -60,4 +64,4 @@ const Contacts = () => {
     </div>
   );
 };
-export default Contacts;
+export default Comments;

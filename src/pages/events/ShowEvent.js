@@ -5,50 +5,44 @@ import Navigation from "../../components/Navigation";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Events = () => {
-  const [events, setEvents] = useState([]);
+const ShowEvent = () => {
+  const [showEvent, setShowEvent] = useState([]);
   useEffect(() => {
-    displayEvents();
+    displayShowEvent();
   }, []);
   // Sans les crochets ça tourne en boucle
 
-  const displayEvents = async () => {
-    await axios.get("http://localhost:8000/api/events").then((res) => {
-      setEvents(res.data.data);
+  const displayShowEvent = async () => {
+    await axios.get("http://localhost:8000/api/events/${id}").then((res) => {
+      setShowEvent(res.data.data);
     });
   };
-  const deleteEvent = (id) => {
-    axios.delete(`http://localhost:8000/api/events/${id}`).then(displayEvents);
+  const deleteShowEvent = (id) => {
+    axios
+      .delete(`http://localhost:8000/api/events/${id}`)
+      .then(displayShowEvent);
   };
 
   return (
     <div>
-      {/* <Navigation /> */}
+      <Navigation />
       <div className="container mt-5">
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>Titres</th>
-              <th>Soustitres</th>
-              <th>Contenus</th>
-              <th>Sites</th>
-              <th>Photos</th>
+              <th>Titre</th>
+              <th>Soustitre</th>
+              <th>Contenu</th>
+              <th>Photo</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {events.map((event) => (
+            {showEvent.map((event) => (
               <tr key={event.id}>
                 <td>{event.titleEvent}</td>
                 <td>{event.subtitleEvent}</td>
                 <td>{event.contentEvent}</td>
-                <td>
-                  <ul>
-                    {event.sites.map((site) => (
-                      <li key={site.id}>{site.nameSite}</li>
-                    ))}
-                  </ul>
-                </td>
                 <td>{event.pictureEvent}</td>
                 <td>
                   <img
@@ -67,7 +61,7 @@ const Events = () => {
                   <Button
                     variant="danger"
                     onClick={() => {
-                      deleteEvent(event.id);
+                      deleteShowEvent(event.id);
                     }}
                   >
                     Supprimer
@@ -82,4 +76,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default ShowEvent;

@@ -1,0 +1,37 @@
+.navLink:hover {
+    transition: 0.3s;
+    color: $color-1 !important;
+}
+
+.navLink:active {
+    color: $color-1 !important;
+}
+
+.connex {
+    font-size: 0.8rem;
+    margin-top: 3px;
+}
+
+.connex:hover {
+    transition: 0.3s;
+    color: $color-1 !important;
+}
+
+.connex:active {
+    color: $color-1 !important;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo>* {
+    margin-right: 10px;
+    /* espace entre le logo et le texte */
+}
+
+.navOmbre {
+    box-shadow: 5px 5px 5px grey;
+}

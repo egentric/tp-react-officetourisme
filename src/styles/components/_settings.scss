@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "font-1";
+    src: url(../assets/fonts/Poppins-Regular.ttf);
+}
+
+$font-1: "font-1",
+sans-serif;
+
+$color-1: #118398;
+$color-2: #e5e5e5;
+$color-3: #4d4d4d;
+$color-4: #72A200;
+$white: rgb(243, 243, 243);
+
+@mixin verticalCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: $white;
+    font-family: $font-1;
+    // @include verticalCenter;
+}
+
+li {
+    list-style-type: none;
+}

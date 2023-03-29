@@ -17,6 +17,21 @@ li {
   list-style-type: none;
 }
 
+.btn-1 {
+  background-color: #72A200 !important;
+  color: rgb(243, 243, 243) !important;
+  border-radius: 0 !important;
+}
+
+.btn-1:hover {
+  transition: 0.3s !important;
+  background-color: #118398 !important;
+}
+
+.btn-danger {
+  border-radius: 0 !important;
+}
+
 .navLink:hover {
   transition: 0.3s;
   color: #118398 !important;
@@ -53,4 +68,91 @@ li {
 
 .navOmbre {
   box-shadow: 5px 5px 5px grey;
+}
+
+.sidebar {
+  background-color: #4d4d4d !important;
+  color: rgb(243, 243, 243) !important;
+}
+
+.link:hover {
+  color: #72A200 !important;
+  transition: 0.3s;
+}
+
+.link:active {
+  color: #72A200 !important;
+}
+
+.menu {
+  margin-left: 15px !important;
+}
+
+.nav-item {
+  margin-left: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.link2 {
+  color: rgb(243, 243, 243);
+  text-decoration: none;
+}
+
+.link2:hover {
+  color: #72A200 !important;
+  transition: 0.3s;
+}
+
+.link2:active {
+  color: #72A200 !important;
+}
+
+.card {
+  border-radius: 0 !important;
+}
+
+.card-body {
+  background-color: #e5e5e5;
+}
+
+.card-title {
+  color: #118398;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: rgb(243, 243, 243);
+}
+
+thead {
+  background-color: rgb(243, 243, 243);
+}
+
+.btn-1 {
+  background-color: #72A200 !important;
+  color: rgb(243, 243, 243) !important;
+  border-radius: 0 !important;
+  border-style: none !important;
+}
+
+.btn-1:hover {
+  transition: 0.3s !important;
+  background-color: #118398 !important;
+}
+
+.btn-danger {
+  border-radius: 0 !important;
+}
+
+.btn-2 {
+  background-color: #118398 !important;
+  color: rgb(243, 243, 243) !important;
+  border-radius: 0 !important;
+  border-style: none !important;
+}
+
+.btn-2:hover {
+  transition: 0.3s !important;
+  background-color: #72A200 !important;
 }/*# sourceMappingURL=index.css.map */

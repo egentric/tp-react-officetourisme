@@ -1,0 +1,42 @@
+.sidebar {
+    background-color: $color-3 !important;
+    color: $white !important;
+}
+
+.link:hover {
+    color: $color-4 !important;
+    transition: 0.3s;
+
+}
+
+.link:active {
+    color: $color-4 !important;
+
+}
+
+.menu {
+    margin-left: 15px !important;
+
+}
+
+
+.nav-item {
+    margin-left: 10px !important;
+    margin-bottom: 20px !important;
+}
+
+.link2 {
+    color: $white;
+    text-decoration: none;
+}
+
+.link2:hover {
+    color: $color-4 !important;
+    transition: 0.3s;
+
+}
+
+.link2:active {
+    color: $color-4 !important;
+
+}

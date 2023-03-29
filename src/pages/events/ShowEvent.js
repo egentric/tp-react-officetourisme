@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Navigation from "../../components/Navigation";
+import Sidebar from "../../components/Sidebar";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const ShowEvent = () => {
-  const [showEvent, setShowEvent] = useState([]);
+  const { event } = useParams();
+  const navigate = useNavigate();
+  const [image, setImage] = useState("");
+  const [showEvent, setShowEvent] = useState("");
   useEffect(() => {
     displayShowEvent();
   }, []);
   // Sans les crochets ça tourne en boucle
 
   const displayShowEvent = async () => {
-    await axios.get("http://localhost:8000/api/events/${id}").then((res) => {
-      setShowEvent(res.data.data);
-    });
+    await axios
+      .get("http://localhost:8000/api/events/${event}")
+      .then((res) => {
+        setShowEvent(res.data[0]);
+        console.log(res.data);
+        setImage(res.data[0].pictureEvent);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const deleteShowEvent = (id) => {
     axios
@@ -24,53 +35,88 @@ const ShowEvent = () => {
   };
 
   return (
-    <div>
-      <Navigation />
-      <div className="container mt-5">
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Titre</th>
-              <th>Soustitre</th>
-              <th>Contenu</th>
-              <th>Photo</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {showEvent.map((event) => (
-              <tr key={event.id}>
-                <td>{event.titleEvent}</td>
-                <td>{event.subtitleEvent}</td>
-                <td>{event.contentEvent}</td>
-                <td>{event.pictureEvent}</td>
-                <td>
-                  <img
-                    src={`http://localhost:8000/storage/uploads/${event.pictureEvent}`}
-                    alt={event.pictureEvent}
-                    width="75px"
-                  />
-                </td>
-                <td>
-                  <Link
-                    to={`/events/edit/${event.id}`}
-                    className="btn btn-success me-2"
-                  >
-                    Edit
-                  </Link>
-                  <Button
-                    variant="danger"
-                    onClick={() => {
-                      deleteShowEvent(event.id);
-                    }}
-                  >
-                    Supprimer
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+    <div style={{ display: "flex" }}>
+      <Sidebar />
+      <div style={{ flex: "1", display: "inline-flex" }}>
+        <div className="container mt-5">
+          <div className="row justify-content-center">
+            <div className="col-12 col-sm-12 col-md-12">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Evénement</h4>
+                  <hr />
+                  <Table striped bordered hover>
+                    <tbody>
+                      <tr>
+                        <th>Titre</th>
+                        <td>{showEvent.titleEvent}</td>
+                      </tr>
+                      <tr>
+                        <th>SousTitre</th>
+                        <td>{showEvent.subTitleEvent}</td>
+                      </tr>
+                      <tr>
+                        <th>Contenu</th>
+                        <td>{showEvent.contentEvent}</td>
+                      </tr>
+                      <tr>
+                        <th>Site</th>
+                        <td>
+                          <ul>
+                            {showEvent.map((site) => (
+                              <li>{site.nameSite}</li>
+                            ))}
+                          </ul>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <th>Nom de la Photo</th>
+                        <td>{showEvent.pictureEvent}</td>
+                      </tr>
+                      <tr>
+                        <th>Photo</th>
+                        <td>
+                          <img
+                            src={`http://localhost:8000/public/storage/uploads/events/${image}`}
+                            alt={showEvent.pictureEvent}
+                            width="75px"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Actions</th>
+                        <td>
+                          <Button
+                            className="btn-1 btn-sm me-2"
+                            onClick={() => navigate(-1)}
+                          >
+                            Retour
+                          </Button>
+                          <Link
+                            to={`/events/edit/${showEvent.id}`}
+                            className="btn btn-2 btn-sm me-2"
+                          >
+                            Edit
+                          </Link>
+                          <Button
+                            className="btn-sm"
+                            variant="danger"
+                            onClick={() => {
+                              deleteShowEvent(showEvent.id);
+                            }}
+                          >
+                            Supprimer
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

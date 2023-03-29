@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Navigation from "../../components/Navigation";
+import Sidebar from "../../components/Sidebar";
 
 const EditItem = () => {
   const { item } = useParams();
@@ -15,6 +15,7 @@ const EditItem = () => {
   const [contentItem, setContentItem] = useState("");
   const [pictureItem, setPictureItem] = useState(null);
   const [validationError, setValidationError] = useState({});
+  const [user_id, setUserId] = useState("");
   useEffect(() => {
     getItem();
   }, []);
@@ -25,9 +26,10 @@ const EditItem = () => {
       .get(`http://localhost:8000/api/items/${item}`)
       .then((res) => {
         console.log(res.data);
-        setTitleItem(res.data.titleItem);
-        setSubtitleItem(res.data.subtitleItem);
-        setContentItem(res.data.contentItem);
+        setTitleItem(res.data[0].titleItem);
+        setSubtitleItem(res.data[0].subtitleItem);
+        setContentItem(res.data[0].contentItem);
+        setUserId(res.data[0].user_id);
       })
       .catch((error) => {
         console.log(error);
@@ -40,10 +42,11 @@ const EditItem = () => {
   const updateItem = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("_method", "PATCH");
+    formData.append("_method", "POST");
     formData.append("subtitleItem", subtitleItem);
     formData.append("titleItem", titleItem);
     formData.append("contentItem", contentItem);
+    formData.append("user_id", user_id);
 
     if (pictureItem !== null) {
       formData.append("pictureItem", pictureItem);
@@ -57,95 +60,110 @@ const EditItem = () => {
         }
       });
   };
+
   return (
     <div>
-      <Navigation />
-      <div className="container mt-5">
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-6">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Modifier un article</h4>
-                <hr />
-                <div className="form-wrapper">
-                  {Object.keys(validationError).length > 0 && (
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="alert alert-danger">
-                          <ul className="mb-0">
-                            {Object.entries(validationError).map(
-                              ([key, value]) => (
-                                <li key={key}>{value}</li>
-                              )
-                            )}
-                          </ul>
+      <div style={{ display: "flex" }}>
+        <Sidebar />
+        <div style={{ flex: "1", display: "inline-flex" }}>
+          <div className="container mt-5">
+            <div className="row justify-content-center">
+              <div className="col-12 col-sm-12 col-md-6">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Modifier un Article</h4>
+                    <hr />
+                    <div className="form-wrapper">
+                      {Object.keys(validationError).length > 0 && (
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="alert alert-danger">
+                              <ul className="mb-0">
+                                {Object.entries(validationError).map(
+                                  ([key, value]) => (
+                                    <li key={key}>{value}</li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      )}
+                      <Form onSubmit={updateItem}>
+                        <Row>
+                          <Col>
+                            <Form.Group controlId="titleItem">
+                              <Form.Label>Titre de l'article</Form.Label>
+                              <Form.Control
+                                type="text"
+                                value={titleItem}
+                                onChange={(event) => {
+                                  setTitleItem(event.target.value);
+                                }}
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <Form.Group controlId="subtitleItem">
+                              <Form.Label>Soustitre de l'article</Form.Label>
+                              <Form.Control
+                                type="text"
+                                value={subtitleItem}
+                                onChange={(event) => {
+                                  setSubtitleItem(event.target.value);
+                                }}
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <Form.Group controlId="contentItem">
+                              <Form.Label>Contenu de l'article</Form.Label>
+                              <Form.Control
+                                as="textarea"
+                                rows={6}
+                                value={contentItem}
+                                onChange={(event) => {
+                                  setContentItem(event.target.value);
+                                }}
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <Form.Group
+                              controlId="pictureItem"
+                              className="mb-3"
+                            >
+                              <Form.Label>Image</Form.Label>
+                              <Form.Control
+                                type="file"
+                                onChange={changeHandler}
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Button
+                          className="btn-1 btn-sm me-2 mt-2"
+                          onClick={() => navigate(-1)}
+                        >
+                          Retour
+                        </Button>
+                        <Button
+                          className="mt-2 btn-2 btn-sm"
+                          size="lg"
+                          block="block"
+                          type="submit"
+                        >
+                          Modifier
+                        </Button>
+                      </Form>
                     </div>
-                  )}
-                  <Form onSubmit={updateItem}>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="titleItem">
-                          <Form.Label>Titre de l'article</Form.Label>
-                          <Form.Control
-                            type="text"
-                            value={titleItem}
-                            onChange={(event) => {
-                              setTitleItem(event.target.value);
-                            }}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="subtitleItem">
-                          <Form.Label>Soustitre de l'article</Form.Label>
-                          <Form.Control
-                            type="text"
-                            value={subtitleItem}
-                            onChange={(event) => {
-                              setSubtitleItem(event.target.value);
-                            }}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="contentItem">
-                          <Form.Label>Contenu de l'article</Form.Label>
-                          <Form.Control
-                            as="textarea"
-                            rows={6}
-                            value={contentItem}
-                            onChange={(event) => {
-                              setContentItem(event.target.value);
-                            }}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="pictureItem" className="mb-3">
-                          <Form.Label>Image</Form.Label>
-                          <Form.Control type="file" onChange={changeHandler} />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Button
-                      variant="primary"
-                      className="mt-2"
-                      size="lg"
-                      block="block"
-                      type="submit"
-                    >
-                      Modifier
-                    </Button>
-                  </Form>
+                  </div>
                 </div>
               </div>
             </div>

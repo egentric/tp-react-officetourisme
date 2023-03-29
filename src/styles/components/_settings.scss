@@ -33,3 +33,20 @@ body {
 li {
     list-style-type: none;
 }
+
+.btn-1 {
+    background-color: $color-4 !important;
+    color: $white !important;
+    border-radius: 0 !important;
+}
+
+.btn-1:hover {
+    transition: 0.3s !important;
+    background-color: $color-1 !important;
+
+}
+
+.btn-danger {
+    border-radius: 0 !important;
+
+}

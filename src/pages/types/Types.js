@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Navigation from "../../components/Navigation";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Sidebar from "../../components/Sidebar";
 
 const Types = () => {
   const [types, setTypes] = useState([]);
@@ -22,39 +22,59 @@ const Types = () => {
   };
 
   return (
-    <div>
-      <Navigation />
-      <div className="container mt-5">
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Types</th>
-            </tr>
-          </thead>
-          <tbody>
-            {types.map((type) => (
-              <tr key={type.id}>
-                <td>{type.nameType}</td>
-                <td>
+    <div style={{ display: "flex" }}>
+      <Sidebar />
+      <div style={{ flex: "1", display: "inline-flex" }}>
+        <div className="container mt-5">
+          <div className="row justify-content-center">
+            <div className="col-12 col-sm-12 col-md-12">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Types</h4>
+                  <hr />
                   <Link
-                    to={`/types/edit/${type.id}`}
-                    className="btn btn-success me-2"
+                    to={`/types/add`}
+                    className="btn btn-2 btn-sm me-2 mb-2"
                   >
-                    Edit
+                    Nouveau
                   </Link>
-                  <Button
-                    variant="danger"
-                    onClick={() => {
-                      deleteType(type.id);
-                    }}
-                  >
-                    Supprimer
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Types</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {types.map((type) => (
+                        <tr key={type.id}>
+                          <td>{type.nameType}</td>
+                          <td>
+                            <Link
+                              to={`/types/edit/${type.id}`}
+                              className="btn btn-1 btn-sm me-2"
+                            >
+                              Edit
+                            </Link>
+                            <Button
+                              className="btn-sm"
+                              variant="danger"
+                              onClick={() => {
+                                deleteType(type.id);
+                              }}
+                            >
+                              Supprimer
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

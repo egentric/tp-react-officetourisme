@@ -1,7 +1,7 @@
 import React from "react";
 import CarouselHome from "../components/CarouselHome";
 import Navigation from "../components/Navigation";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/Sidebar";
 
 const Home = () => {
   return (

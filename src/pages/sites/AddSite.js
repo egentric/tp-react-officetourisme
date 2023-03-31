@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -19,12 +19,36 @@ const AddSite = () => {
   const [citySite, setCitySite] = useState("");
   const [longitudeDegSite, setLongitudeDegSite] = useState("");
   const [latitudeDegSite, setLatitudeDegSite] = useState("");
+  const [user_id, setUserId] = useState(1);
 
   const [pictureSite, setPictureSite] = useState("");
   const [validationError, setValidationError] = useState({});
   const changeHandler = (event) => {
     setPictureSite(event.target.files[0]);
   };
+
+  // // ------------Affichage Select----------------------------------------//
+  // état pour stocker les types de site
+  const [types, setTypes] = useState([]);
+  // Ajouter les types de site dans l'état "types" à partir d'une API ou d'une liste
+  useEffect(() => {
+    getTypes();
+  }, []);
+  //Méthode pour récupérer les sites
+  const getTypes = async () => {
+    await axios.get("http://localhost:8000/api/types").then((res) => {
+      setTypes(res.data.data);
+      // console.log(res.data.data);
+    });
+  };
+  // // ------------Fin Affichage Select------------------------------------------//
+
+  // // ------------Récupértion value du Select------------------------------------------//
+  const [selectedValue, setSelectedValue] = useState("");
+  const handleSelectChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+  // // ------------ Fin Récupértion value du Select------------------------------------------//
 
   //Fonction d'ajout de l'article
   const AddSite = async (e) => {
@@ -38,9 +62,13 @@ const AddSite = () => {
     formData.append("addressSite", addressSite);
     formData.append("zipSite", zipSite);
     formData.append("citySite", citySite);
-    formData.append("emailSite", emailSite);
-    formData.append("citySite", citySite);
+    formData.append("longitudeDegSite", longitudeDegSite);
+    formData.append("latitudeDegSite", latitudeDegSite);
     formData.append("pictureSite", pictureSite);
+    formData.append("user_id", user_id);
+
+    formData.append("type_id", selectedValue);
+
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
@@ -95,18 +123,24 @@ const AddSite = () => {
                               />
                             </Form.Group>
                           </Col>
+                          {/* // // ------------Select---------------------------------// */}
                           <Col>
-                            <Form.Group controlId="nameType">
+                            <Form.Group controlId="type">
                               <Form.Label>Type de site</Form.Label>
-
-                              <Form.Select aria-label="Default select example">
-                                <option>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                              <Form.Select
+                                value={selectedValue}
+                                onChange={handleSelectChange}
+                              >
+                                <option>Sélectionner un type :</option>
+                                {types.map((type) => (
+                                  <option key={type.id} value={type.id}>
+                                    {type.nameType}
+                                  </option>
+                                ))}
                               </Form.Select>
                             </Form.Group>
                           </Col>
+                          {/* // // ------------Fin Select--------------------------------// */}
                         </Row>
 
                         <Row>
@@ -243,8 +277,7 @@ const AddSite = () => {
                           </Col>
                         </Row>
                         <Button
-                          variant="primary"
-                          className="mt-2"
+                          className="btn-2 mt-2 btn-sm"
                           size="lg"
                           block="block"
                           type="submit"

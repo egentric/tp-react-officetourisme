@@ -22,9 +22,9 @@ const ShowEvent = () => {
     await axios
       .get(`http://localhost:8000/api/events/${event}`)
       .then((res) => {
-        setShowEvent(res.data[0]);
-        setSites(res.data[0].site);
-        setImage(res.data[0].pictureEvent);
+        setShowEvent(res.data);
+        setSites(res.data.site);
+        setImage(res.data.pictureEvent);
       })
       .catch((error) => {
         console.log(error);

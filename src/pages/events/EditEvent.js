@@ -18,7 +18,6 @@ const EditEvent = () => {
 
   const [checkedSites, setCheckedSites] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
-  const [truc, setTruc] = useState([]);
 
   const [pictureEvent, setPictureEvent] = useState("");
   const [validationError, setValidationError] = useState({});
@@ -26,11 +25,6 @@ const EditEvent = () => {
   useEffect(() => {
     getEvent();
     getSites();
-
-    for (let index = 0; index < checkedSites.length; index++) {
-      truc.push(checkedSites[index].id);
-    }
-    console.log(truc);
   }, []);
 
   //Méthode pour récupérer les sites
@@ -46,11 +40,11 @@ const EditEvent = () => {
       .get(`http://localhost:8000/api/events/${event}`)
       .then((res) => {
         // console.log(res.data);
-        setTitleEvent(res.data[0].titleEvent);
-        setSubtitleEvent(res.data[0].subtitleEvent);
-        setContentEvent(res.data[0].contentEvent);
-        setCheckedSites(res.data[0].site);
-        // console.log(res.data[0].site);
+        setTitleEvent(res.data.titleEvent);
+        setSubtitleEvent(res.data.subtitleEvent);
+        setContentEvent(res.data.contentEvent);
+        const ids = res.data.site.map((site) => site.id);
+        setCheckedSites(ids);
       })
       .catch((error) => {
         console.log(error);
@@ -186,7 +180,9 @@ const EditEvent = () => {
                                   type="checkbox"
                                   label={site.nameSite}
                                   value={site.id}
-                                  checked={checkedSites.includes(site.id)}
+                                  defaultChecked={checkedSites.includes(
+                                    site.id
+                                  )}
                                   onChange={(event) =>
                                     setIsChecked(event.target.checked)
                                   }

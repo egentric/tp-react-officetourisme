@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const ShowEvent = () => {
   const { event } = useParams();
   const navigate = useNavigate();
+  const [sites, setSites] = useState([]);
   const [image, setImage] = useState("");
   const [showEvent, setShowEvent] = useState("");
   useEffect(() => {
@@ -16,12 +17,13 @@ const ShowEvent = () => {
   }, []);
   // Sans les crochets ça tourne en boucle
 
+  // console.log(sites);
   const displayShowEvent = async () => {
     await axios
-      .get("http://localhost:8000/api/events/${event}")
+      .get(`http://localhost:8000/api/events/${event}`)
       .then((res) => {
         setShowEvent(res.data[0]);
-        console.log(res.data);
+        setSites(res.data[0].site);
         setImage(res.data[0].pictureEvent);
       })
       .catch((error) => {
@@ -53,7 +55,7 @@ const ShowEvent = () => {
                       </tr>
                       <tr>
                         <th>SousTitre</th>
-                        <td>{showEvent.subTitleEvent}</td>
+                        <td>{showEvent.subtitleEvent}</td>
                       </tr>
                       <tr>
                         <th>Contenu</th>
@@ -62,10 +64,12 @@ const ShowEvent = () => {
                       <tr>
                         <th>Site</th>
                         <td>
+                          {/* {showEvent.site.nameSite} */}
                           <ul>
-                            {showEvent.map((site) => (
-                              <li>{site.nameSite}</li>
-                            ))}
+                            {sites &&
+                              sites.map((site) => (
+                                <li key={site.id}>{site.nameSite}</li>
+                              ))}
                           </ul>
                         </td>
                       </tr>
@@ -78,7 +82,7 @@ const ShowEvent = () => {
                         <th>Photo</th>
                         <td>
                           <img
-                            src={`http://localhost:8000/public/storage/uploads/events/${image}`}
+                            src={`http://localhost:8000/storage/uploads/events/${image}`}
                             alt={showEvent.pictureEvent}
                             width="75px"
                           />

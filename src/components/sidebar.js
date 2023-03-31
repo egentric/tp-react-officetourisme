@@ -16,7 +16,7 @@ const Sidebar = () => {
     <div
       style={{
         display: "inline-flex",
-        height: "100vh",
+        // height: "100%",
         overflow: "scroll initial",
       }}
     >
@@ -121,7 +121,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink exact to="/" className="link">
+                <NavLink exact to="/sites" className="link">
                   {/* <CDBSidebarMenuItem icon="chart-line">Sites</CDBSidebarMenuItem> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

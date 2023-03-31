@@ -12,6 +12,7 @@ const AddItem = () => {
   const [titleItem, setTitleItem] = useState("");
   const [subtitleItem, setSubtitleItem] = useState("");
   const [contentItem, setContentItem] = useState("");
+  const [user_id, setUserId] = useState("");
 
   const [pictureItem, setPictureItem] = useState("");
   const [validationError, setValidationError] = useState({});
@@ -27,6 +28,8 @@ const AddItem = () => {
     formData.append("subtitleItem", subtitleItem);
     formData.append("contentItem", contentItem);
     formData.append("pictureItem", pictureItem);
+    formData.append("user_id", user_id);
+
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }

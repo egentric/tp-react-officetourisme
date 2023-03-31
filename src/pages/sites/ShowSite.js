@@ -1,88 +1,154 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import Navigation from "../../components/Navigation";
+import Sidebar from "../../components/Sidebar";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const ShowSite = () => {
-  const [showSite, setShowSite] = useState([]);
+  const { site } = useParams();
+  const navigate = useNavigate();
+  const [image, setImage] = useState("");
+  const [showSite, setShowSite] = useState("");
+
   useEffect(() => {
     displayShowSite();
   }, []);
   // Sans les crochets ça tourne en boucle
 
   const displayShowSite = async () => {
-    await axios.get("http://localhost:8000/api/sites/${id}").then((res) => {
-      setShowSite(res.data.data);
-    });
+    await axios
+      .get(`http://localhost:8000/api/sites/${site}`)
+      .then((res) => {
+        // console.log(res.data);
+        setShowSite(res.data[0]);
+        // console.log(res.data);
+        setImage(res.data[0].pictureSite);
+        // console.log(setShowSite);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const deleteShowSite = (id) => {
     axios.delete(`http://localhost:8000/api/sites/${id}`).then(displayShowSite);
   };
 
   return (
-    <div>
-      <Navigation />
-      <div className="container mt-5">
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Nom</th>
-              <th>Description</th>
-              <th>Email</th>
-              <th>Site internet</th>
-              <th>Téléphone</th>
-              <th>Adresse</th>
-              <th>Code postal</th>
-              <th>Ville</th>
-              <th>longitude</th>
-              <th>latitude</th>
-              <th>Photo</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {showSite.map((site) => (
-              <tr key={site.id}>
-                <td>{site.nameSite}</td>
-                <td>{site.descriptionSite}</td>
-                <td>{site.emailSite}</td>
-                <td>{site.websiteSite}</td>
-                <td>{site.phoneSite}</td>
-                <td>{site.addressSite}</td>
-                <td>{site.zipSite}</td>
-                <td>{site.citySite}</td>
-                <td>{site.longitudeDegSite}</td>
-                <td>{site.emailSite}</td>
-                <td>{site.latitudeDegSite}</td>
-                <td>
-                  <img
-                    src={`http://localhost:8000/storage/uploads/${site.pictureSite}`}
-                    alt={site.pictureSite}
-                    width="75px"
-                  />
-                </td>
-                <td>
-                  <Link
-                    to={`/sites/edit/${site.id}`}
-                    className="btn btn-success me-2"
-                  >
-                    Edit
-                  </Link>
-                  <Button
-                    variant="danger"
-                    onClick={() => {
-                      deleteShowSite(site.id);
-                    }}
-                  >
-                    Supprimer
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+    <div style={{ display: "flex" }}>
+      <Sidebar />
+      <div style={{ flex: "1", display: "inline-flex" }}>
+        <div className="container mt-5">
+          <div className="row justify-content-center">
+            <div className="col-12 col-sm-12 col-md-12">
+              <div className="card">
+                <div className="card-body">
+                  <h4 className="card-title">Site</h4>
+                  <hr />
+                  <Table striped bordered hover>
+                    <tbody>
+                      <tr>
+                        <th>Nom</th>
+                        <td>{showSite.nameSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Type</th>
+                        <td>{showSite.nameType}</td>
+                      </tr>
+                      <tr>
+                        <th>Description</th>
+                        <td>{showSite.descriptionSite}</td>
+                      </tr>
+
+                      <tr>
+                        <th>Email</th>
+                        <td>{showSite.emailSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Site Internet</th>
+                        <td>{showSite.websiteSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Téléphone</th>
+                        <td>{showSite.phoneSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Adresse</th>
+                        <td>{showSite.addressSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Code postal</th>
+                        <td>{showSite.zipSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Ville</th>
+                        <td>{showSite.citySite}</td>
+                      </tr>
+                      <tr>
+                        <th>Nom de l'auteur</th>
+                        <td>
+                          {showSite.firstName} {showSite.lastName}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Nom de la Photo</th>
+                        <td>{showSite.pictureSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Photo</th>
+                        <td>
+                          <img
+                            src={`http://localhost:8000/storage/uploads/sites/${image}`}
+                            alt={showSite.pictureSite}
+                            width="75px"
+                          />
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Longitude</th>
+                        <td>{showSite.longitudeDegSite}</td>
+                      </tr>
+                      <tr>
+                        <th>Latitude</th>
+                        <td>{showSite.latitudeDegSite}</td>
+                      </tr>
+
+                      <tr>
+                        <th>Actions</th>
+                        <td>
+                          <Button
+                            className="btn-1 btn-sm me-2"
+                            onClick={() => navigate(-1)}
+                          >
+                            Retour
+                          </Button>
+
+                          <Link
+                            to={`/sites/edit/${showSite.id}`}
+                            className="btn btn-2 btn-sm me-2"
+                          >
+                            Edit
+                          </Link>
+
+                          <Button
+                            className="btn-sm"
+                            variant="danger"
+                            onClick={() => {
+                              deleteShowSite(showSite.id);
+                            }}
+                          >
+                            Supprimer
+                          </Button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

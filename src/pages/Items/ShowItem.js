@@ -77,7 +77,7 @@ const ShowItem = () => {
                         <th>Photo</th>
                         <td>
                           <img
-                            src={`http://localhost:8000/public/uploads/items/${image}`}
+                            src={`http://localhost:8000/storage/uploads/items/${image}`}
                             alt={showItem.pictureItem}
                             width="75px"
                           />

@@ -33,7 +33,7 @@ const Events = () => {
                   <h4 className="card-title">Evénements</h4>
                   <hr />
                   <Link
-                    to={`/eventss/add`}
+                    to={`/events/add`}
                     className="btn btn-2 btn-sm me-2 mb-2"
                   >
                     Nouveau

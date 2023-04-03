@@ -10,7 +10,7 @@ import Sidebar from "../../components/Sidebar";
 const AddEvent = () => {
   const navigate = useNavigate();
   const [titleEvent, setTitleEvent] = useState("");
-  const [subTitleEvent, setSubTitleEvent] = useState("");
+  const [subtitleEvent, setSubtitleEvent] = useState("");
   const [contentEvent, setContentEvent] = useState("");
 
   //   const [site_id, setSiteId] = useState("");
@@ -38,25 +38,35 @@ const AddEvent = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("titleEvent", titleEvent);
-    formData.append("subtitleEvent", subTitleEvent);
+    formData.append("subtitleEvent", subtitleEvent);
     formData.append("contentEvent", contentEvent);
     formData.append("pictureEvent", pictureEvent);
     // console.log(site_id);
 
+    // =================================checkbox================================
     //Je récupère les valeurs des checkbox
     const checkSites = document.getElementsByName("sites");
     // console.log(checkSites.length);
 
+    // vérifie si chaque élément est coché ou non
+    // Si l'élément est coché, sa valeur est ajoutée à un objet FormData
     for (var i = 0; i < checkSites.length; i++) {
       if (checkSites[i].checked) {
         formData.append("site_id[]", checkSites[i].value);
-
-        // console.log(idSite);
       }
     }
+    // La boucle suivante utilise la méthode formData.entries() pour afficher toutes les paires clé-valeur de l'objet FormData dans la console.
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
+
+    // Ajouter les valeurs cochées à formData
+    for (const siteId of checkSites) {
+      formData.append("site_id[]", siteId);
+    }
+
+    // =================================Fin checkbox================================
+
     // console.log(sites);
     await axios
       .post(`http://127.0.0.1:8000/api/events`, formData)
@@ -114,13 +124,13 @@ const AddEvent = () => {
                         </Row>
                         <Row>
                           <Col>
-                            <Form.Group controlId="subTitleEvent">
+                            <Form.Group controlId="subtitleEvent">
                               <Form.Label>SousTitre de l'événement</Form.Label>
                               <Form.Control
                                 type="text"
-                                value={subTitleEvent}
+                                value={subtitleEvent}
                                 onChange={(event) => {
-                                  setSubTitleEvent(event.target.value);
+                                  setSubtitleEvent(event.target.value);
                                 }}
                               />
                             </Form.Group>
@@ -143,6 +153,7 @@ const AddEvent = () => {
                         </Row>
                         <Row>
                           <Col>
+                            {/* ////////////////////////////////////////////////////////////Checkbox////////////////////////////////////////                      */}
                             <div className="mt-4">
                               <label htmlFor="discipline">Sites</label>
                               {sites.map((site) => (
@@ -163,23 +174,7 @@ const AddEvent = () => {
                                 </div>
                               ))}
                             </div>
-
-                            {/* <Form.Group controlId="site">
-                              <Form.Label htmlFor="disabledSelect">
-                                Sites
-                              </Form.Label>
-                              {sites.map((site) => (
-                                <div key={site.id} className="form-check">
-                                  <Form.Check
-                                    label={site.nameSite}
-                                    name="sites"
-                                    type="checkbox"
-                                    value={site.id}
-                                    id="flexCheckDefault"
-                                  />
-                                </div>
-                              ))}
-                            </Form.Group> */}
+                            {/* ////////////////////////////////////////////////////////////Fin Checkbox////////////////////////////////////////                      */}
                           </Col>
                         </Row>
                         <Row>
@@ -196,6 +191,12 @@ const AddEvent = () => {
                             </Form.Group>
                           </Col>
                         </Row>
+                        <Button
+                          className="btn-1 btn-sm me-2 mt-2"
+                          onClick={() => navigate(-1)}
+                        >
+                          Retour
+                        </Button>
                         <Button
                           className="btn-2 mt-2 btn-sm"
                           size="lg"

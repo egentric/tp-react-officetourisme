@@ -66,27 +66,30 @@ const EditEvent = () => {
 
     if (pictureEvent !== null) {
       formData.append("pictureEvent", pictureEvent);
-    } // console.log(site_id);
+    }
 
+    // =================================checkbox================================
     //Je récupère les valeurs des checkbox
     const checkSites = document.getElementsByName("sites");
     // console.log(checkSites.length);
 
+    // vérifie si chaque élément est coché ou non
     for (var i = 0; i < checkSites.length; i++) {
+      // Si l'élément est coché, sa valeur est ajoutée à un objet FormData
       if (checkSites[i].checked) {
         formData.append("site_id[]", checkSites[i].value);
-
-        // console.log(idSite);
       }
     }
+    // La boucle suivante utilise la méthode formData.entries() pour afficher toutes les paires clé-valeur de l'objet FormData dans la console.
     for (var pair of formData.entries()) {
-      // console.log(pair[0] + ", " + pair[1]);
+      console.log(pair[0] + ", " + pair[1]);
     }
 
     // Ajouter les valeurs cochées à formData
     for (const siteId of checkedSites) {
       formData.append("site_id[]", siteId);
     }
+    // =================================Fin checkbox================================
 
     await axios
       .post(`http://127.0.0.1:8000/api/events/${event}`, formData)
@@ -169,13 +172,14 @@ const EditEvent = () => {
                             </Form.Group>
                           </Col>
                         </Row>
-                        {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+                        {/* /////////////////////////////////////Checkbox////////////////////////////////////////////////////////////////////////////////////// */}
                         <Row>
                           <Col>
                             <div className="mt-4">
                               <label htmlFor="discipline">Sites</label>
                               {sites.map((site) => (
                                 <Form.Check
+                                  name="sites"
                                   key={site.id}
                                   type="checkbox"
                                   label={site.nameSite}
@@ -191,6 +195,8 @@ const EditEvent = () => {
                             </div>
                           </Col>
                         </Row>
+                        {/* /////////////////////////////////////Fin Checkbox////////////////////////////////////////////////////////////////////////////////////// */}
+
                         <Row>
                           <Col>
                             <Form.Group
@@ -205,13 +211,20 @@ const EditEvent = () => {
                             </Form.Group>
                           </Col>
                         </Row>
+
+                        <Button
+                          className="btn-1 btn-sm me-2 mt-2"
+                          onClick={() => navigate(-1)}
+                        >
+                          Retour
+                        </Button>
                         <Button
                           className="btn-2 mt-2 btn-sm"
                           size="lg"
                           block="block"
                           type="submit"
                         >
-                          Créer
+                          Modifier
                         </Button>
                       </Form>
                     </div>

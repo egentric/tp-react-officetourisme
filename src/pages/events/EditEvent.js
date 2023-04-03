@@ -85,10 +85,6 @@ const EditEvent = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
 
-    // Ajouter les valeurs cochées à formData
-    for (const siteId of checkedSites) {
-      formData.append("site_id[]", siteId);
-    }
     // =================================Fin checkbox================================
 
     await axios

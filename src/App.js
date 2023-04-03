@@ -32,6 +32,8 @@ import EditType from "./pages/types/EditType";
 import Users from "./pages/users/Users";
 import EditUser from "./pages/users/EditUser";
 
+import Dashboard from "./pages/Dashboard";
+
 // import View from "./pages/View";
 
 function App() {
@@ -68,6 +70,8 @@ function App() {
 
         <Route path="/users" element={<Users />} />
         <Route path="/users/edit/:user" element={<EditUser />} />
+
+        <Route path="/dashboard" element={<Dashboard />} />
 
         {/* path="*" fonctionne si jamais l'url ne correspond à rien de déclaré au dessus */}
         <Route path="*" element={<Home />} />

@@ -50,7 +50,7 @@ const EditType = () => {
       <div style={{ flex: "1", display: "inline-flex" }}>
         <div className="container mt-5">
           <div className="row justify-content-center">
-            <div className="col-12 col-sm-12 col-md-6">
+            <div className="col-12 col-sm-12 col-md-10">
               <div className="card">
                 <div className="card-body">
                   <h4 className="card-title">Modifier un type</h4>

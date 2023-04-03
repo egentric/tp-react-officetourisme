@@ -59,12 +59,6 @@ const AddEvent = () => {
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-
-    // Ajouter les valeurs cochées à formData
-    for (const siteId of checkSites) {
-      formData.append("site_id[]", siteId);
-    }
-
     // =================================Fin checkbox================================
 
     // console.log(sites);

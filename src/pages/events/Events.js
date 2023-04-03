@@ -83,7 +83,7 @@ const Events = () => {
                               to={`/events/edit/${event.id}`}
                               className="btn btn-1 btn-sm me-2"
                             >
-                              Edit
+                              Modifier
                             </Link>
                             <Button
                               className="btn-sm "

@@ -47,7 +47,7 @@ const Sidebar = () => {
           <CDBSidebarMenu>
             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-md-start">
               <li className="nav-item">
-                <NavLink exact to="/" className="link">
+                <NavLink exact to="/dashboard" className="link">
                   {/* <CDBSidebarMenuItem> */}
                   <svg
                     className="px-0 ms-4"
@@ -174,7 +174,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink exact to="/" className="link">
+                <NavLink exact to="/users" className="link">
                   {/* <CDBSidebarMenuItem icon="chart-line"> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

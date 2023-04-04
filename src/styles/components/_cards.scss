@@ -4,6 +4,13 @@
 
 .card-body {
     background-color: $color-2;
+
+}
+
+.cardbody {
+    background-color: white;
+    padding: 0px !important;
+
 }
 
 .card-title {
@@ -11,4 +18,17 @@
     text-align: center;
     text-transform: uppercase;
 
+}
+
+.cardtitle {
+    background-color: $white;
+    padding: 12px;
+}
+
+.cardtexte {
+    padding: 12px;
+}
+
+.cardlink {
+    text-decoration: none;
 }

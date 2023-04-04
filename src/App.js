@@ -6,11 +6,15 @@ import Items from "./pages/Items/Items";
 import AddItem from "./pages/Items/AddItem";
 import EditItem from "./pages/Items/EditItem";
 import ShowItem from "./pages/Items/ShowItem";
+import AffItems from "./pages/Items/AffItems";
+import AffItem from "./pages/Items/AffItem";
 
 import ShowEvent from "./pages/events/ShowEvent";
 import Events from "./pages/events/Events";
 import AddEvent from "./pages/events/AddEvent";
 import EditEvent from "./pages/events/EditEvent";
+import AffEvents from "./pages/events/AffEvents";
+import AffEvent from "./pages/events/AffEvent";
 
 import Comments from "./pages/comments/Comments";
 import AddComment from "./pages/comments/AddComment";
@@ -45,11 +49,15 @@ function App() {
         <Route path="/items/add" element={<AddItem />} />
         <Route path="/items/edit/:item" element={<EditItem />} />
         <Route path="/items/show/:item" element={<ShowItem />} />
+        <Route path="/items/affs" element={<AffItems />} />
+        <Route path="/items/aff/:item" element={<AffItem />} />
 
         <Route path="/events" element={<Events />} />
         <Route path="/events/add" element={<AddEvent />} />
         <Route path="/events/edit/:event" element={<EditEvent />} />
         <Route path="/events/show/:event" element={<ShowEvent />} />
+        <Route path="/events/affs" element={<AffEvents />} />
+        <Route path="/events/aff/:event" element={<AffEvent />} />
 
         <Route path="/comments" element={<Comments />} />
         <Route path="/comments/add" element={<AddComment />} />

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const ShowItem = () => {
   const { item } = useParams();
   const navigate = useNavigate();
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
   const [showItem, setShowItem] = useState("");
 
   useEffect(() => {
@@ -24,9 +24,9 @@ const ShowItem = () => {
         // console.log(res.data);
         console.log("test");
 
-        setShowItem(res.data[0]);
+        setShowItem(res.data.item);
 
-        setImage(res.data[0].pictureItem);
+        // setImage(res.data.item.pictureItem);
         console.log(showItem);
       })
       .catch((error) => {
@@ -77,7 +77,7 @@ const ShowItem = () => {
                         <th>Photo</th>
                         <td>
                           <img
-                            src={`http://localhost:8000/storage/uploads/items/${image}`}
+                            src={`http://localhost:8000/storage/uploads/items/${showItem.pictureItem}`}
                             alt={showItem.pictureItem}
                             width="75px"
                           />

@@ -22,18 +22,17 @@ const EditItem = () => {
 
   // GET - Récupère les valeurs de la fiche avec l'API
   const getItem = async () => {
-    await axios
-      .get(`http://localhost:8000/api/items/${item}`)
-      .then((res) => {
-        console.log(res.data);
-        setTitleItem(res.data[0].titleItem);
-        setSubtitleItem(res.data[0].subtitleItem);
-        setContentItem(res.data[0].contentItem);
-        setUserId(res.data[0].user_id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    await axios.get(`http://localhost:8000/api/items/${item}`).then((res) => {
+      console.log(res.data);
+      setTitleItem(res.data.item.titleItem);
+      setSubtitleItem(res.data.item.subtitleItem);
+      setContentItem(res.data.item.contentItem);
+      setUserId(res.data.item.user_id);
+      console.log(res.data.item.titleItem);
+    });
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   };
   const changeHandler = (event) => {
     setPictureItem(event.target.files[0]);

@@ -85,187 +85,202 @@ const Dashboard = () => {
         <div className="container mt-5">
           <Row>
             {/* =======================EVENEMENTS======================= */}
+
             <div className="col-4 col-sm-12 col-md-4">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">événements</h4>
-                  <hr />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Titres</th>
-                        {/* <th>Soustitres</th> */}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {events.map((event) => (
-                        <tr key={event.id}>
-                          <td>{event.titleEvent}</td>
-                          {/* <td>{event.subtitleEvent}</td> */}
+              <Link exact to="/events" className="cardlink">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">événements</h4>
+                    <hr />
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Titres</th>
+                          {/* <th>Soustitres</th> */}
                         </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                      </thead>
+                      <tbody>
+                        {events.map((event) => (
+                          <tr key={event.id}>
+                            <td>{event.titleEvent}</td>
+                            {/* <td>{event.subtitleEvent}</td> */}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* =======================ITEMS======================= */}
             <div className="col-4 col-sm-12 col-md-4">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">articles</h4>
-                  <hr />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Titres</th>
-                        {/* <th>Soustitres</th> */}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {items.map((item) => (
-                        <tr key={item.id}>
-                          <td>{item.titleItem}</td>
-                          {/* <td>{item.subtitleItem}</td> */}
+              <Link exact to="/items" className="cardlink">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">articles</h4>
+                    <hr />
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Titres</th>
+                          {/* <th>Soustitres</th> */}
                         </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                      </thead>
+                      <tbody>
+                        {items.map((item) => (
+                          <tr key={item.id}>
+                            <td>{item.titleItem}</td>
+                            {/* <td>{item.subtitleItem}</td> */}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* =======================COMMENTS======================= */}
             <div className="col-4 col-sm-12 col-md-4 ">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Commentaires</h4>
-                  <hr />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Titres</th>
-                        <th>De l'articles</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {comments.map((comment) => (
-                        <tr key={comment.id}>
-                          <td>{comment.titleComment}</td>
-                          <td>{comment.titleItem}</td>
+              <Link exact to="/comments" className="cardlink">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Commentaires</h4>
+                    <hr />
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Titres</th>
+                          <th>De l'articles</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                      </thead>
+                      <tbody>
+                        {comments.map((comment) => (
+                          <tr key={comment.id}>
+                            <td>{comment.titleComment}</td>
+                            <td>{comment.titleItem}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </Row>
           <Row className="row justify-content-center">
             {/* =======================SITES======================= */}
             <div className="col-6 col-sm-12 col-md-6 mt-3">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Sites</h4>
-                  <hr />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Noms</th>
-                        <th>Types</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sites.map((site) => (
-                        <tr key={site.id}>
-                          <td>{site.nameSite}</td>
-                          <td>{site.type.nameType}</td>
+              <Link exact to="/sites" className="cardlink">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Sites</h4>
+                    <hr />
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Noms</th>
+                          <th>Types</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                      </thead>
+                      <tbody>
+                        {sites.map((site) => (
+                          <tr key={site.id}>
+                            <td>{site.nameSite}</td>
+                            <td>{site.type.nameType}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* =======================TYPES======================= */}
             <div className="col-4 col-sm-12 col-md-4 mt-3">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Types</h4>
-                  <hr />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Types</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {types.map((type) => (
-                        <tr key={type.id}>
-                          <td>{type.nameType}</td>
+              <Link exact to="/types" className="cardlink">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Types</h4>
+                    <hr />
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Types</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                      </thead>
+                      <tbody>
+                        {types.map((type) => (
+                          <tr key={type.id}>
+                            <td>{type.nameType}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </Row>
           <Row>
             {/* =======================Contact======================= */}
             <div className="col-6 col-sm-12 col-md-6 mt-3">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Contacts</h4>
-                  <hr />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Email</th>
-                        <th>Sujet</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {contacts.map((contact) => (
-                        <tr key={contact.id}>
-                          <td>{contact.email}</td>
-                          <td>{contact.topic}</td>
+              <Link exact to="/contacts" className="cardlink">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Contacts</h4>
+                    <hr />
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Email</th>
+                          <th>Sujet</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                      </thead>
+                      <tbody>
+                        {contacts.map((contact) => (
+                          <tr key={contact.id}>
+                            <td>{contact.email}</td>
+                            <td>{contact.topic}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             {/* =======================Utilisateurs======================= */}
             <div className="col-6 col-sm-12 col-md-6 mt-3">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="card-title">Utilisateurs</h4>
-                  <hr />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Prénoms</th>
-                        <th>Noms</th>
-                        <th>Roles</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users.map((user) => (
-                        <tr key={user.id}>
-                          <td>{user.firstName}</td>
-                          <td>{user.lastName}</td>
-                          <td>{user.role}</td>
+              <Link exact to="/users" className="cardlink">
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">Utilisateurs</h4>
+                    <hr />
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>Prénoms</th>
+                          <th>Noms</th>
+                          <th>Roles</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                      </thead>
+                      <tbody>
+                        {users.map((user) => (
+                          <tr key={user.id}>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.role}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </Row>
         </div>

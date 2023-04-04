@@ -1,6 +1,8 @@
 @font-face {
   font-family: "font-1";
   src: url(../assets/fonts/Poppins-Regular.ttf);
+  font-family: "font-2";
+  src: url(../assets/fonts/DeliciousHandrawn-Regular.ttf);
 }
 * {
   padding: 0;
@@ -17,19 +19,38 @@ li {
   list-style-type: none;
 }
 
-.btn-1 {
-  background-color: #72A200 !important;
-  color: rgb(243, 243, 243) !important;
-  border-radius: 0 !important;
+h2 {
+  font-family: "font-2", cursive;
+  color: #72A200;
+  text-align: center;
+  font-size: 4rem !important;
 }
 
-.btn-1:hover {
-  transition: 0.3s !important;
-  background-color: #118398 !important;
+.blur-background {
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-.btn-danger {
-  border-radius: 0 !important;
+.comment-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
 .navLink:hover {
@@ -115,10 +136,28 @@ li {
   background-color: #e5e5e5;
 }
 
+.cardbody {
+  background-color: white;
+  padding: 0px !important;
+}
+
 .card-title {
   color: #118398;
   text-align: center;
   text-transform: uppercase;
+}
+
+.cardtitle {
+  background-color: rgb(243, 243, 243);
+  padding: 12px;
+}
+
+.cardtexte {
+  padding: 12px;
+}
+
+.cardlink {
+  text-decoration: none;
 }
 
 table tbody tr:nth-child(even) {

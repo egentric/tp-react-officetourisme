@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import About from "./pages/About";
-import Home from "./pages/Home";
+import Home from "./pages/layouts/Home";
 import Items from "./pages/Items/Items";
 import AddItem from "./pages/Items/AddItem";
 import EditItem from "./pages/Items/EditItem";
@@ -28,6 +28,8 @@ import Sites from "./pages/sites/Sites";
 import AddSite from "./pages/sites/AddSite";
 import EditSite from "./pages/sites/EditSite";
 import ShowSite from "./pages/sites/ShowSite";
+import AffSites from "./pages/sites/AffSites";
+import AffSite from "./pages/sites/AffSite";
 
 import Types from "./pages/types/Types";
 import AddType from "./pages/types/AddType";
@@ -36,7 +38,7 @@ import EditType from "./pages/types/EditType";
 import Users from "./pages/users/Users";
 import EditUser from "./pages/users/EditUser";
 
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/layouts/Dashboard";
 
 // import View from "./pages/View";
 
@@ -71,6 +73,8 @@ function App() {
         <Route path="/sites/add" element={<AddSite />} />
         <Route path="/sites/edit/:site" element={<EditSite />} />
         <Route path="/sites/show/:site" element={<ShowSite />} />
+        <Route path="/sites/affs/:type" element={<AffSites />} />
+        <Route path="/sites/aff/:site" element={<AffSite />} />
 
         <Route path="/types" element={<Types />} />
         <Route path="/types/add" element={<AddType />} />

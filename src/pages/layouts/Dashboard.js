@@ -4,7 +4,7 @@ import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 const Dashboard = () => {
   const [types, setTypes] = useState([]);

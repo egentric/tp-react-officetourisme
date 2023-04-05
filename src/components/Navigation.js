@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Logo from "./Logo";
+import axios from "axios";
 
-const navigation = () => {
+const Navigation = ({ onSelect }) => {
+  const [types, setTypes] = useState([]);
+
+  useEffect(() => {
+    displayTypes();
+  }, []);
+  // Sans les crochets ça tourne en boucle
+
+  const displayTypes = async () => {
+    await axios.get("http://localhost:8000/api/types").then((res) => {
+      setTypes(res.data.data);
+    });
+  };
+  // const handleTypeSelection = (eventKey) => {
+  //   const selectedType = types.find((type) => type.nameType === eventKey);
+  //   onSelect(selectedType);
+  // };
+
   return (
     <Navbar bg="light" expand="lg" className="navOmbre fixed-top">
       <Container>
@@ -26,11 +44,16 @@ const navigation = () => {
               id="basic-nav-dropdown"
               className="navLink"
             >
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              {types.map((type) => (
+                <div key={type.id}>
+                  <NavDropdown.Item
+                    href={`/sites/affs/${type.id}`}
+                    eventKey={type.nameType}
+                  >
+                    {type.nameType}
+                  </NavDropdown.Item>
+                </div>
+              ))}
             </NavDropdown>
             <Nav.Link href="/contacts/add" className="navLink">
               Contacts
@@ -45,4 +68,4 @@ const navigation = () => {
   );
 };
 
-export default navigation;
+export default Navigation;

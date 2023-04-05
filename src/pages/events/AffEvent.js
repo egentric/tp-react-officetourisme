@@ -69,6 +69,18 @@ const AffEvent = () => {
                     <Card.Text className="cardtexte">
                       {affEvent.contentEvent}
                     </Card.Text>
+                    <Card.Text className="cardsite">
+                      <p className="vert">Sites liés à cette événement :</p>
+                      <ul>
+                        {sites &&
+                          sites.map((site) => (
+                            <li className="listeSite" key={site.id}>
+                              {site.nameSite}
+                            </li>
+                          ))}
+                      </ul>
+                    </Card.Text>
+
                     <Button
                       className="btn-1 btn-sm mb-2  ms-2"
                       onClick={() => navigate(-1)}

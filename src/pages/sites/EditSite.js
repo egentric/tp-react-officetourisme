@@ -50,7 +50,7 @@ const EditSite = () => {
     await axios
       .get(`http://localhost:8000/api/sites/${site}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setNameSite(res.data[0].nameSite);
         setDescriptionSite(res.data[0].descriptionSite);
         setEmailSite(res.data[0].emailSite);
@@ -85,12 +85,19 @@ const EditSite = () => {
     formData.append("zipSite", zipSite);
     formData.append("citySite", citySite);
     formData.append("emailSite", emailSite);
+    formData.append("longitudeDegSite", longitudeDegSite);
+    formData.append("latitudeDegSite", latitudeDegSite);
     formData.append("citySite", citySite);
+    formData.append("type_id", selectedValue);
     formData.append("user_id", user_id);
 
     if (pictureSite !== null) {
       formData.append("pictureSite", pictureSite);
     }
+    // console.log(formData);
+    // formData.forEach(function (value, key) {
+    //   console.log(key + ": " + value);
+    // });
     await axios
       .post(`http://localhost:8000/api/sites/${site}`, formData)
       .then(navigate("/sites"))
@@ -110,7 +117,7 @@ const EditSite = () => {
               <div className="col-12 col-sm-12 col-md-12">
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="card-title">Création d'un nouvel Site</h4>
+                    <h4 className="card-title">Création d'un nouveau Site</h4>
                     <hr />
                     <div className="form-wrapper">
                       {Object.keys(validationError).length > 0 && (

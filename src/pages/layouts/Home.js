@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import CarouselHome from "../components/CarouselHome";
-import Navigation from "../components/Navigation";
+import CarouselHome from "../../components/CarouselHome";
+import Navigation from "../../components/Navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";

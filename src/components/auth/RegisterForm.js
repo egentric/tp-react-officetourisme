@@ -27,6 +27,7 @@ const RegisterForm = () => {
     try {
       const response = await axios
         .post(`http://127.0.0.1:8000/api/register`, formData)
+        .then(navigate("/login"))
         .catch(({ response }) => {
           if (response.status === 422) {
             setValidationError(response.data.errors);

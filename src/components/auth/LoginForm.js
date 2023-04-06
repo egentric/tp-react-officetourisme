@@ -23,12 +23,12 @@ const Login = () => {
       const response = await axios
         .post(`http://127.0.0.1:8000/api/login`, formData)
         .catch(({ response }) => {
+          const data = response.json();
           if (response.status === 422) {
             setValidationError(response.data.errors);
           }
         });
 
-      const data = await response.json();
       if (data.status === "success") {
         // console.log("Login successful");
         // console.log(data.authorisation.token);

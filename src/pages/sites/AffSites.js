@@ -86,7 +86,11 @@ const AffSites = () => {
                         overflow: "hidden",
                       }}
                     >
-                      {affSite.descriptionSite}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: affSite.descriptionSite,
+                        }}
+                      />
                     </Card.Text>
                     <Link
                       to={`/sites/aff/${affSite.id}`}

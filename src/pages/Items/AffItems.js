@@ -63,7 +63,11 @@ const AffItems = () => {
                           overflow: "hidden",
                         }}
                       >
-                        {item.contentItem}
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: item.contentItem,
+                          }}
+                        />
                       </Card.Text>{" "}
                       <Link
                         to={`/items/aff/${item.id}`}

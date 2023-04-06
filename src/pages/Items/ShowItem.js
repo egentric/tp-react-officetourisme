@@ -61,7 +61,13 @@ const ShowItem = () => {
                       </tr>
                       <tr>
                         <th>Contenu</th>
-                        <td>{showItem.contentItem}</td>
+                        <td>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: showItem.contentItem,
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <th>Nom de l'auteur</th>

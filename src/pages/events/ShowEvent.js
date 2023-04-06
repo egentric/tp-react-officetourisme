@@ -59,7 +59,13 @@ const ShowEvent = () => {
                       </tr>
                       <tr>
                         <th>Contenu</th>
-                        <td>{showEvent.contentEvent}</td>
+                        <td>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: showEvent.contentEvent,
+                            }}
+                          />
+                        </td>
                       </tr>
                       <tr>
                         <th>Site</th>

@@ -67,7 +67,11 @@ const AffEvent = () => {
                       {affEvent.subtitleEvent}
                     </Card.Title>
                     <Card.Text className="cardtexte">
-                      {affEvent.contentEvent}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: affEvent.contentEvent,
+                        }}
+                      />
                     </Card.Text>
                     <Card.Text className="cardsite">
                       <p className="vert">Sites liés à cette événement :</p>

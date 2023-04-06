@@ -8,14 +8,12 @@ import Col from "react-bootstrap/Col";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import Map from "../../components/Map";
 
 const AffSite = () => {
   const { site } = useParams();
   const navigate = useNavigate();
   const [affSite, setAffSite] = useState("");
-  const [latitudeDegSite, setLatitudeDegSite] = useState("");
-  const [longitudeDegSite, setLongitudeDegSite] = useState("");
 
   useEffect(() => {
     displayAffSite();
@@ -30,14 +28,12 @@ const AffSite = () => {
         // console.log(res.data[0]);
         // console.log(res.data[0].latitudeDegSite);
         setAffSite(res.data[0]);
-        setLatitudeDegSite(res.data[0].latitudeDegSite);
-        setLongitudeDegSite(res.data[0].longitudeDegSite);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const position = [latitudeDegSite, longitudeDegSite];
+  // const position = [latitudeDegSite, longitudeDegSite];
 
   return (
     <div>
@@ -71,7 +67,11 @@ const AffSite = () => {
                       {affSite.nameSite}
                     </Card.Title>
                     <Card.Text className="cardtexte">
-                      {affSite.descriptionSite}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: affSite.descriptionSit,
+                        }}
+                      />
                     </Card.Text>
                     <Card.Text className="cardsite">
                       <p className="vert">Contact :</p>
@@ -150,24 +150,7 @@ const AffSite = () => {
                           </ul>
                         </Col>
                         <Col x={12} md={6}>
-                          {latitudeDegSite && longitudeDegSite && (
-                            <MapContainer
-                              center={position}
-                              zoom={13}
-                              scrollWheelZoom={false}
-                            >
-                              <TileLayer
-                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                              />
-                              <Marker position={position}>
-                                <Popup>
-                                  A pretty CSS3 popup. <br /> Easily
-                                  customizable.
-                                </Popup>
-                              </Marker>
-                            </MapContainer>
-                          )}
+                          <Map />
                         </Col>
                       </Row>
                     </Card.Text>

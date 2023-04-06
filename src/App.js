@@ -40,6 +40,9 @@ import EditUser from "./pages/users/EditUser";
 
 import Dashboard from "./pages/layouts/Dashboard";
 
+import Login from "./pages/layouts/Login";
+import Register from "./pages/layouts/Register";
+
 // import View from "./pages/View";
 
 function App() {
@@ -87,6 +90,9 @@ function App() {
 
         {/* path="*" fonctionne si jamais l'url ne correspond à rien de déclaré au dessus */}
         <Route path="*" element={<Home />} />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

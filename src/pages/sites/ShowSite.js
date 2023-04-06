@@ -58,7 +58,13 @@ const ShowSite = () => {
                       </tr>
                       <tr>
                         <th>Description</th>
-                        <td>{showSite.descriptionSite}</td>
+                        <td>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: showSite.descriptionSite,
+                            }}
+                          />
+                        </td>
                       </tr>
 
                       <tr>

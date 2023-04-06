@@ -6,6 +6,8 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const EditEvent = () => {
   const navigate = useNavigate();
@@ -157,6 +159,44 @@ const EditEvent = () => {
                           <Col>
                             <Form.Group controlId="contentEvent">
                               <Form.Label>Contenu de l'événement</Form.Label>
+
+                              <CKEditor
+                                editor={ClassicEditor}
+                                config={{
+                                  toolbar: [
+                                    "heading",
+                                    "|",
+                                    "bold",
+                                    "italic",
+                                    "link",
+                                    "bulletedList",
+                                    "numberedList",
+                                    "blockQuote",
+                                  ],
+                                }}
+                                data={contentEvent}
+                                onReady={(editor) => {
+                                  // You can store the "editor" and use when it is needed.
+                                  console.log(
+                                    "Editor is ready to use!",
+                                    editor
+                                  );
+                                }}
+                                onChange={(event, editor) => {
+                                  const data = editor.getData();
+                                  console.log({ event, editor, data });
+                                  setContentEvent(data);
+                                }}
+                                onBlur={(event, editor) => {
+                                  console.log("Blur.", editor);
+                                }}
+                                onFocus={(event, editor) => {
+                                  console.log("Focus.", editor);
+                                }}
+                              />
+                            </Form.Group>
+                            {/* <Form.Group controlId="contentEvent">
+                              <Form.Label>Contenu de l'événement</Form.Label>
                               <Form.Control
                                 as="textarea"
                                 rows={8}
@@ -165,7 +205,7 @@ const EditEvent = () => {
                                   setContentEvent(event.target.value);
                                 }}
                               />
-                            </Form.Group>
+                            </Form.Group> */}
                           </Col>
                         </Row>
                         {/* /////////////////////////////////////Checkbox////////////////////////////////////////////////////////////////////////////////////// */}

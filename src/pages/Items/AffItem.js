@@ -83,7 +83,11 @@ const AffItem = () => {
                       {itemData.subtitleItem}
                     </Card.Title>
                     <Card.Text className="cardtexte">
-                      {itemData.contentItem}
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: itemData.contentItem,
+                        }}
+                      />
                     </Card.Text>
                     <Button
                       className="btn-1 btn-sm mb-2  ms-2"

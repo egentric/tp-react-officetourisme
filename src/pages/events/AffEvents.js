@@ -58,13 +58,17 @@ const AffEvents = () => {
                         className="cardtexte"
                         style={{
                           display: "-webkit-box",
-                          WebkitLineClamp: 3,
+                          WebkitLineClamp: 2,
                           WebkitBoxOrient: "vertical",
                           overflow: "hidden",
                         }}
                       >
-                        {event.contentEvent}
-                      </Card.Text>{" "}
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: event.contentEvent,
+                          }}
+                        />
+                      </Card.Text>
                       <Link
                         to={`/events/aff/${event.id}`}
                         className="btn btn-2 btn-sm ms-2 mb-2"

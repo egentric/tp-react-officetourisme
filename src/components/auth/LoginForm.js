@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,62 +20,95 @@ const Login = () => {
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    try {
-      const response = await axios
-        .post(`http://127.0.0.1:8000/api/login`, formData)
-        .catch(({ response }) => {
-          const data = response.json();
-          if (response.status === 422) {
-            setValidationError(response.data.errors);
-          }
-        });
 
-      if (data.status === "success") {
-        // console.log("Login successful");
-        // console.log(data.authorisation.token);
+    const log = await axios
+      .post(`http://127.0.0.1:8000/api/login`, formData)
+      .then((response) => {
+        // const token = response.data.token
+        console.log(response.data);
+        if (response.data.status == "success") {
+          localStorage.setItem("token", response.data.authorisation.token);
 
-        localStorage.setItem("token", data.authorisation.token);
-        // window.location.href = "/";
-        navigate("/", { replace: true });
-      } else {
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+          navigate("/");
+        } else {
+          console.error("Login failed");
+        }
+      });
+    // .catch(( response ) => {
+    //     // const data = response.json();
+    //     if (response.status === 422) {
+    //         setValidationError(response.data.errors);
+    //     }
+    // });
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h3>Login</h3>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
-        <Form.Label>Adresse email</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Form.Group>
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-12 col-md-6 mt-5">
+          <Row>
+            <h2 className="mb-4 mt-5">Connectez-vous</h2>
+          </Row>
+          <div className="card">
+            <div className="card-body">
+              <h4 className="card-title">Login</h4>
+              <hr />
+              <div className="form-wrapper">
+                {Object.keys(validationError).length > 0 && (
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="alert alert-danger">
+                        <ul className="mb-0">
+                          {Object.entries(validationError).map(
+                            ([key, value]) => (
+                              <li key={key}>{value}</li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3" controlId="formGroupEmail">
+                    <Form.Label>Adresse email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      placeholder="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formGroupPassword">
-        <Form.Label>Mot de passe</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Mot de passe"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Form.Group>
-      <Button
-        className="btn-2 mt-2 btn-sm"
-        size="lg"
-        block="block"
-        type="submit"
-      >
-        Login
-      </Button>
-    </Form>
+                  <Form.Group className="mb-3" controlId="formGroupPassword">
+                    <Form.Label>Mot de passe</Form.Label>
+                    <Form.Control
+                      type="password"
+                      placeholder="Mot de passe"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Button
+                    className="btn-2 mt-2 btn-sm"
+                    size="lg"
+                    block="block"
+                    type="submit"
+                  >
+                    Connexion
+                  </Button>
+                  <Row>
+                    <a href="/register" className="register">
+                      Enregistrez-vous
+                    </a>
+                  </Row>
+                </Form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

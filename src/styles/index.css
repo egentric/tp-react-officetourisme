@@ -75,6 +75,23 @@ li .contact2 {
   margin-left: 32px !important;
 }
 
+.register {
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.register {
+  padding-top: 10px;
+  text-decoration: none;
+  color: #118398;
+}
+
+.register:hover {
+  transition: 0.5s;
+  text-decoration: underline;
+  color: #72A200;
+}
+
 .navLink:hover {
   transition: 0.3s;
   color: #118398 !important;
@@ -86,7 +103,6 @@ li .contact2 {
 
 .connex {
   font-size: 0.8rem;
-  margin-top: 3px;
 }
 
 .connex:hover {

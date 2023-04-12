@@ -36,7 +36,11 @@ const EditType = () => {
     formData.append("nameType", nameType);
 
     await axios
-      .post(`http://localhost:8000/api/types/${type}`, formData)
+      .post(`http://localhost:8000/api/types/${type}`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/types"))
       .catch(({ response }) => {
         if (response.status === 422) {

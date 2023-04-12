@@ -4,9 +4,12 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const Types = () => {
   const [types, setTypes] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     displayTypes();
   }, []);
@@ -18,7 +21,13 @@ const Types = () => {
     });
   };
   const deleteType = (id) => {
-    axios.delete(`http://localhost:8000/api/types/${id}`).then(displayTypes);
+    axios
+      .delete(`http://localhost:8000/api/types/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(displayTypes);
   };
 
   return (

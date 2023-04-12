@@ -18,7 +18,13 @@ const Sites = () => {
     });
   };
   const deleteSite = (id) => {
-    axios.delete(`http://localhost:8000/api/sites/${id}`).then(displaySites);
+    axios
+      .delete(`http://localhost:8000/api/sites/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(displaySites);
   };
 
   return (

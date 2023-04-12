@@ -25,11 +25,19 @@ const AffEvents = () => {
   return (
     <div>
       <Navigation />
+      <div>
+        <img
+          className="img"
+          src="../imagesAll/44_guenrouet9_0513lavelodysseea-lamoureux_hd-1-1024x683.jpg"
+          alt="canal-de-nantes-a-brest"
+        />
+      </div>
+
       <div style={{ display: "flex" }}>
         <div style={{ flex: "1", display: "inline-flex" }}>
           <div className="container mt-5">
             <Row>
-              <h2 className="mb-4 mt-5">Tout nos Evénements</h2>
+              <h2 className="mb-4 mt-2">Tout nos Evénements</h2>
             </Row>
 
             <Row>

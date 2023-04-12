@@ -13,7 +13,7 @@ const EditUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState(null);
+  const [role_id, setRole] = useState("");
   const [validationError, setValidationError] = useState({});
   useEffect(() => {
     getUser();
@@ -22,13 +22,17 @@ const EditUser = () => {
   // GET - Récupère les valeurs de la fiche avec l'API
   const getUser = async () => {
     await axios
-      .get(`http://localhost:8000/api/users/${user}`)
+      .get(`http://localhost:8000/api/users/${user}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then((res) => {
-        console.log(res.data);
-        setFirstName(res.data.firstName);
-        setLastName(res.data.lastName);
-        setEmail(res.data.email);
-        setRole(res.data.role);
+        console.log(res.data.data);
+        setFirstName(res.data.data.firstName);
+        setLastName(res.data.data.lastName);
+        setEmail(res.data.data.email);
+        setRole(res.data.data.role_id);
       })
       .catch((error) => {
         console.log(error);
@@ -42,10 +46,14 @@ const EditUser = () => {
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
     formData.append("email", email);
-    formData.append("role", role);
+    formData.append("role_id", role_id);
 
     await axios
-      .post(`http://localhost:8000/api/users/${user}`, formData)
+      .post(`http://localhost:8000/api/users/${user}`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/users"))
       .catch(({ response }) => {
         if (response.status === 422) {
@@ -123,17 +131,30 @@ const EditUser = () => {
                         </Col>
                         <Col>
                           <Form.Group controlId="Role">
+                            <Form.Label>Role</Form.Label>
                             <Form.Check
                               type="switch"
-                              id="custom-switch"
+                              id="custom-switch-user"
                               label="Utilisateur"
-                              value="user"
+                              value="2"
+                              checked={role_id === 2}
+                              onChange={(event) => {
+                                if (event.target.checked) {
+                                  setRole(2);
+                                }
+                              }}
                             />
                             <Form.Check
                               type="switch"
-                              id="custom-switch"
+                              id="custom-switch-admin"
                               label="Administrateur"
-                              value="admin"
+                              value="1"
+                              checked={role_id === 1}
+                              onChange={(event) => {
+                                if (event.target.checked) {
+                                  setRole(1);
+                                }
+                              }}
                             />
                           </Form.Group>
                         </Col>

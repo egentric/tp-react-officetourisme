@@ -1,6 +1,8 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as icon from "react-bootstrap-icons";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -12,6 +14,27 @@ import {
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
+  // On récupère l'id du user
+  const [userId, setUserId] = useState("");
+  // const [role, setRole] = useState([]);
+
+  const displayUsers = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/api/current-user`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setUserId(res.data.id);
+        // setRole(res.data.role_id);
+      });
+  };
+  // console.log(role);
+  useEffect(() => {
+    displayUsers();
+  }, []); // Sans les crochets ça tourne en boucle
+
   return (
     <div
       style={{
@@ -191,7 +214,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink exact to="/" className="link">
+                <NavLink exact to={`/users/show/${userId}`} className="link">
                   {/* <CDBSidebarMenuItem icon="chart-line"> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -13,13 +13,23 @@ const Contacts = () => {
   // Sans les crochets ça tourne en boucle
 
   const displayContacts = async () => {
-    await axios.get("http://localhost:8000/api/contacts").then((res) => {
-      setContacts(res.data.data);
-    });
+    await axios
+      .get(`http://127.0.0.1:8000/api/contacts`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setContacts(res.data.data);
+      });
   };
   const deleteContact = (id) => {
     axios
-      .delete(`http://localhost:8000/api/contacts/${id}`)
+      .delete(`http://127.0.0.1:8000/api/contacts/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(displayContacts);
   };
 

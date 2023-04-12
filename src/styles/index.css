@@ -92,6 +92,12 @@ li .contact2 {
   color: #72A200;
 }
 
+.img {
+  margin-top: 25px;
+  width: 100%;
+  height: auto;
+}
+
 .navLink:hover {
   transition: 0.3s;
   color: #118398 !important;

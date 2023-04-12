@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { Link } from "react-router-dom";
 
 const ShowItem = () => {
@@ -21,7 +22,7 @@ const ShowItem = () => {
     await axios
       .get(`http://localhost:8000/api/items/${item}`)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         console.log("test");
 
         setShowItem(res.data.item);
@@ -35,9 +36,19 @@ const ShowItem = () => {
   };
 
   const deleteShowItem = (id) => {
-    axios.delete(`http://localhost:8000/api/items/${id}`).then(displayShowItem);
+    axios
+      .delete(`http://localhost:8000/api/items/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(() => {
+        navigate("/items"); // Redirige vers la page d'index après la suppression
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />

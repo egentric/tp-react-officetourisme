@@ -37,11 +37,19 @@ const AddContact = () => {
   return (
     <div>
       <Navigation />
+      <div>
+        <img
+          className="img"
+          src="../imagesAll/paysage-canal-9.jpg"
+          alt="canal-de-nantes-a-brest"
+        />
+      </div>
+
       <div className="container mt-5">
         <div className="row justify-content-center">
           <div className="col-12 col-sm-12 col-md-6 mt-5">
             <Row>
-              <h2 className="mb-4 mt-5">Contactez-nous</h2>
+              <h2 className="mb-4 mt-2">Contactez-nous</h2>
             </Row>
             <div className="card">
               <div className="card-body">

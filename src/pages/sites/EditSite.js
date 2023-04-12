@@ -101,7 +101,11 @@ const EditSite = () => {
     //   console.log(key + ": " + value);
     // });
     await axios
-      .post(`http://localhost:8000/api/sites/${site}`, formData)
+      .post(`http://localhost:8000/api/sites/${site}`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/sites"))
       .catch(({ response }) => {
         if (response.status === 422) {

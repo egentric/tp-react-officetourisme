@@ -37,6 +37,7 @@ import EditType from "./pages/types/EditType";
 
 import Users from "./pages/users/Users";
 import EditUser from "./pages/users/EditUser";
+import ShowUser from "./pages/users/ShowUser";
 
 import Dashboard from "./pages/layouts/Dashboard";
 
@@ -85,6 +86,7 @@ function App() {
 
         <Route path="/users" element={<Users />} />
         <Route path="/users/edit/:user" element={<EditUser />} />
+        <Route path="/users/show/:user" element={<ShowUser />} />
 
         <Route path="/dashboard" element={<Dashboard />} />
 

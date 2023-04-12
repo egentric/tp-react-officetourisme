@@ -18,6 +18,7 @@ const EditItem = () => {
   const [pictureItem, setPictureItem] = useState(null);
   const [validationError, setValidationError] = useState({});
   const [user_id, setUserId] = useState("");
+
   useEffect(() => {
     getItem();
   }, []);
@@ -53,7 +54,11 @@ const EditItem = () => {
       formData.append("pictureItem", pictureItem);
     }
     await axios
-      .post(`http://localhost:8000/api/items/${item}`, formData)
+      .post(`http://localhost:8000/api/items/${item}`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/items"))
       .catch(({ response }) => {
         if (response.status === 422) {

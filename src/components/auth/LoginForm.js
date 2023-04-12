@@ -27,7 +27,10 @@ const Login = () => {
         // const token = response.data.token
         console.log(response.data);
         if (response.data.status == "success") {
-          localStorage.setItem("token", response.data.authorisation.token);
+          localStorage.setItem(
+            "access_token",
+            response.data.authorisation.token
+          );
 
           navigate("/");
         } else {

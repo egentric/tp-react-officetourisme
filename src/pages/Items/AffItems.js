@@ -25,11 +25,18 @@ const AffItems = () => {
   return (
     <div>
       <Navigation />
+      <div>
+        <img
+          className="img"
+          src="../imagesAll/Canal-02.jpg"
+          alt="canal-de-nantes-a-brest"
+        />
+      </div>
       <div style={{ display: "flex" }}>
         <div style={{ flex: "1", display: "inline-flex" }}>
           <div className="container mt-5">
             <Row>
-              <h2 className="mb-4 mt-5">Tout nos Articles</h2>
+              <h2 className="mb-4 mt-3">Tout nos Articles</h2>
             </Row>
 
             <Row>

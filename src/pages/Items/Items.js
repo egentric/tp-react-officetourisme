@@ -18,7 +18,13 @@ const Items = () => {
     });
   };
   const deleteItem = (id) => {
-    axios.delete(`http://localhost:8000/api/items/${id}`).then(displayItems);
+    axios
+      .delete(`http://localhost:8000/api/items/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(displayItems);
   };
 
   return (

@@ -13,12 +13,24 @@ const Users = () => {
   // Sans les crochets ça tourne en boucle
 
   const displayUsers = async () => {
-    await axios.get("http://localhost:8000/api/users").then((res) => {
-      setUsers(res.data.data);
-    });
+    await axios
+      .get("http://localhost:8000/api/users", {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setUsers(res.data.data);
+      });
   };
   const deleteUser = (id) => {
-    axios.delete(`http://localhost:8000/api/users/${id}`).then(displayUsers);
+    axios
+      .delete(`http://localhost:8000/api/users/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(displayUsers);
   };
 
   return (

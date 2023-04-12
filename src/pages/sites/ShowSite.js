@@ -32,7 +32,18 @@ const ShowSite = () => {
       });
   };
   const deleteShowSite = (id) => {
-    axios.delete(`http://localhost:8000/api/sites/${id}`).then(displayShowSite);
+    axios
+      .delete(`http://localhost:8000/api/sites/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(() => {
+        navigate("/sites"); // Redirige vers la page d'index après la suppression
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

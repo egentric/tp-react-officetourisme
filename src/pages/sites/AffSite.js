@@ -69,7 +69,7 @@ const AffSite = () => {
                     <Card.Text className="cardtexte">
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: affSite.descriptionSit,
+                          __html: affSite.descriptionSite,
                         }}
                       />
                     </Card.Text>

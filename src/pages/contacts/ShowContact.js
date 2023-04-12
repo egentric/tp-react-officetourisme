@@ -17,7 +17,11 @@ const ShowContact = () => {
 
   const displayShowContact = async () => {
     await axios
-      .get(`http://localhost:8000/api/contacts/${contact}`)
+      .get(`http://localhost:8000/api/contacts/${contact}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setShowContact(res.data[0]);
@@ -29,10 +33,16 @@ const ShowContact = () => {
   };
 
   const deleteShowContact = (id) => {
-    axios.delete(`http://localhost:8000/api/contacts/${id}`).then(() => {
-      displayShowContact();
-      navigate(-1); // Navigation à la page précédente
-    });
+    axios
+      .delete(`http://localhost:8000/api/contacts/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(() => {
+        displayShowContact();
+        navigate(-1); // Navigation à la page précédente
+      });
   };
 
   return (

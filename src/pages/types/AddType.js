@@ -21,7 +21,11 @@ const AddType = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
     await axios
-      .post(`http://127.0.0.1:8000/api/types`, formData)
+      .post(`http://127.0.0.1:8000/api/types`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/types"))
       .catch(({ response }) => {
         if (response.status === 422) {

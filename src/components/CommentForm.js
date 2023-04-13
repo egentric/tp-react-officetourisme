@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -11,10 +11,32 @@ const CommentForm = () => {
   const navigate = useNavigate();
   const [titleComment, setTitleComment] = useState("");
   const [contentComment, setContentComment] = useState("");
-  const [user_id, setUserId] = useState("2");
+  // const [user_id, setUserId] = useState("");
 
   const [validationError, setValidationError] = useState({});
   // console.log(item);
+
+  // On récupère l'id du user
+  const [user, setUser] = useState([]);
+  const [role, setRole] = useState([]);
+
+  const displayUsers = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/api/current-user`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+        setRole(res.data.role_id);
+      });
+  };
+  // console.log(role);
+
+  useEffect(() => {
+    displayUsers();
+  }, []); // Sans les crochets ça tourne en boucle
 
   //Fonction d'ajout de l'article
   const AddComment = async (e) => {
@@ -22,14 +44,18 @@ const CommentForm = () => {
     const formData = new FormData();
     formData.append("titleComment", titleComment);
     formData.append("contentComment", contentComment);
-    formData.append("user_id", user_id);
+    formData.append("user_id", user.id);
     formData.append("item_id", item);
 
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
     await axios
-      .post(`http://127.0.0.1:8000/api/comments`, formData)
+      .post(`http://127.0.0.1:8000/api/comments`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate(0))
       .catch(({ response }) => {
         if (response.status === 422) {

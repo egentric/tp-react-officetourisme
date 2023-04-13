@@ -3,20 +3,42 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Sidebar from "../../components/Sidebar";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import Sidebar from "cdbreact/dist/components/Sidebar";
 
-const Comments = () => {
+const CommentsUser = () => {
+  const { user } = useParams();
   const [comments, setComments] = useState([]);
-  useEffect(() => {
-    displayComments();
-  }, []);
-  // Sans les crochets ça tourne en boucle
+
+  // On récupère l'id du user
+  // const [user, setUser] = useState([]);
+  // const [role, setRole] = useState([]);
+
+  // const displayUsers = async () => {
+  //   await axios
+  //     .get(`http://127.0.0.1:8000/api/current-user`, {
+  //       headers: {
+  //         Authorization: "Bearer" + localStorage.getItem("access_token"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setUser(res.data);
+  //       // setRole(res.data.role_id);
+  //     });
+  // };
+  console.log(user);
 
   const displayComments = async () => {
-    await axios.get("http://localhost:8000/api/comments").then((res) => {
-      setComments(res.data.data);
-    });
+    await axios
+      .get(`http://127.0.0.1:8000/api/comments/user/${user}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        setComments(res.data.data);
+      });
   };
   const deleteComment = (id) => {
     axios
@@ -27,6 +49,12 @@ const Comments = () => {
       })
       .then(displayComments);
   };
+
+  useEffect(() => {
+    // displayUsers();
+    displayComments();
+  }, []);
+  // Sans les crochets ça tourne en boucle
 
   return (
     <div style={{ display: "flex" }}>
@@ -90,4 +118,4 @@ const Comments = () => {
     </div>
   );
 };
-export default Comments;
+export default CommentsUser;

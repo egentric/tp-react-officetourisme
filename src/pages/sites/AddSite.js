@@ -21,13 +21,30 @@ const AddSite = () => {
   const [citySite, setCitySite] = useState("");
   const [longitudeDegSite, setLongitudeDegSite] = useState("");
   const [latitudeDegSite, setLatitudeDegSite] = useState("");
-  const [user_id, setUserId] = useState(1);
+  // const [user_id, setUserId] = useState("1");
 
   const [pictureSite, setPictureSite] = useState("");
   const [validationError, setValidationError] = useState({});
   const changeHandler = (event) => {
     setPictureSite(event.target.files[0]);
   };
+  // On récupère l'id du user
+  const [user, setUser] = useState([]);
+  const [role, setRole] = useState([]);
+
+  const displayUsers = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/api/current-user`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+        setRole(res.data.role_id);
+      });
+  };
+  // console.log(role);
 
   // // ------------Affichage Select----------------------------------------//
   // état pour stocker les types de site
@@ -35,7 +52,9 @@ const AddSite = () => {
   // Ajouter les types de site dans l'état "types" à partir d'une API ou d'une liste
   useEffect(() => {
     getTypes();
+    displayUsers();
   }, []);
+
   //Méthode pour récupérer les sites
   const getTypes = async () => {
     await axios.get("http://localhost:8000/api/types").then((res) => {
@@ -55,6 +74,9 @@ const AddSite = () => {
   //Fonction d'ajout de l'article
   const AddSite = async (e) => {
     e.preventDefault();
+    const user_id = [];
+    user_id.push(user.id);
+
     const formData = new FormData();
     formData.append("nameSite", nameSite);
     formData.append("descriptionSite", descriptionSite);
@@ -75,7 +97,11 @@ const AddSite = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
     await axios
-      .post(`http://127.0.0.1:8000/api/sites`, formData)
+      .post(`http://127.0.0.1:8000/api/sites`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/sites"))
       .catch(({ response }) => {
         if (response.status === 422) {

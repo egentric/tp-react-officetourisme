@@ -65,7 +65,11 @@ const AddEvent = () => {
 
     // console.log(sites);
     await axios
-      .post(`http://127.0.0.1:8000/api/events`, formData)
+      .post(`http://127.0.0.1:8000/api/events`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/events"))
       .catch(({ response }) => {
         if (response.status != 200) {

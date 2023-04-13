@@ -90,7 +90,11 @@ const EditEvent = () => {
     // =================================Fin checkbox================================
 
     await axios
-      .post(`http://127.0.0.1:8000/api/events/${event}`, formData)
+      .post(`http://127.0.0.1:8000/api/events/${event}`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/events"))
       .catch(({ response }) => {
         if (response.status != 200) {

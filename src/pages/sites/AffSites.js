@@ -7,6 +7,7 @@ import Row from "react-bootstrap/esm/Row";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import MapG from "../../components/Map";
 
 const AffSites = () => {
   const { type } = useParams();
@@ -51,7 +52,7 @@ const AffSites = () => {
   return (
     <div style={{ display: "flex" }}>
       <Navigation />
-
+      {/* <MapG /> */}
       <div style={{ flex: "1", display: "inline-flex" }}>
         <div className="container mt-5">
           <Row className="mt-5">

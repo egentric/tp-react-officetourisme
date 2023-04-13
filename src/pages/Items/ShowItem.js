@@ -114,7 +114,7 @@ const ShowItem = () => {
                             to={`/items/edit/${showItem.id}`}
                             className="btn btn-2 btn-sm me-2"
                           >
-                            Edit
+                            Modifier
                           </Link>
 
                           <Button

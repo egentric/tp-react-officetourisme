@@ -63,7 +63,7 @@ const Types = () => {
                               to={`/types/edit/${type.id}`}
                               className="btn btn-1 btn-sm me-2"
                             >
-                              Edit
+                              Modifier
                             </Link>
                             <Button
                               className="btn-sm"

@@ -17,8 +17,9 @@ import AffEvents from "./pages/events/AffEvents";
 import AffEvent from "./pages/events/AffEvent";
 
 import Comments from "./pages/comments/Comments";
-import AddComment from "./pages/comments/AddComment";
+// import AddComment from "./pages/comments/AddComment";
 import ShowComment from "./pages/comments/ShowComment";
+import CommentUser from "./pages/comments/CommentsUser";
 
 import Contacts from "./pages/contacts/Contacts";
 import AddContact from "./pages/contacts/AddContact";
@@ -66,8 +67,9 @@ function App() {
         <Route path="/events/aff/:event" element={<AffEvent />} />
 
         <Route path="/comments" element={<Comments />} />
-        <Route path="/comments/add" element={<AddComment />} />
+        {/* <Route path="/comments/add" element={<AddComment />} /> */}
         <Route path="/comments/show/:comment" element={<ShowComment />} />
+        <Route path="/comments/user/:user" element={<CommentUser />} />
 
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/contacts/add" element={<AddContact />} />

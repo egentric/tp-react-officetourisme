@@ -18,7 +18,13 @@ const Events = () => {
     });
   };
   const deleteEvent = (id) => {
-    axios.delete(`http://localhost:8000/api/events/${id}`).then(displayEvents);
+    axios
+      .delete(`http://localhost:8000/api/events/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(displayEvents);
   };
 
   return (

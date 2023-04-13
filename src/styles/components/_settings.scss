@@ -98,3 +98,26 @@ li {
     }
 
 }
+
+.register {
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.register {
+    padding-top: 10px;
+    text-decoration: none;
+    color: $color-1;
+}
+
+.register:hover {
+    transition: 0.5s;
+    text-decoration: underline;
+    color: $color-4;
+}
+
+.img {
+    margin-top: 25px;
+    width: 100%;
+    height: auto;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -14,7 +14,7 @@ const AddItem = () => {
   const [titleItem, setTitleItem] = useState("");
   const [subtitleItem, setSubtitleItem] = useState("");
   const [contentItem, setContentItem] = useState("");
-  const [user_id, setUserId] = useState("");
+  // const [user_id, setUserId] = useState("");
 
   const [pictureItem, setPictureItem] = useState("");
   const [validationError, setValidationError] = useState({});
@@ -22,9 +22,34 @@ const AddItem = () => {
     setPictureItem(event.target.files[0]);
   };
 
+  // On récupère l'id du user
+  const [user, setUser] = useState([]);
+  const [role, setRole] = useState([]);
+
+  const displayUsers = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/api/current-user`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+        setRole(res.data.role_id);
+      });
+  };
+  // console.log(role);
+
+  useEffect(() => {
+    displayUsers();
+  }, []); // Sans les crochets ça tourne en boucle
+
   //Fonction d'ajout de l'article
   const AddItem = async (e) => {
     e.preventDefault();
+    const user_id = [];
+    user_id.push(user.id);
+
     const formData = new FormData();
     formData.append("titleItem", titleItem);
     formData.append("subtitleItem", subtitleItem);
@@ -36,7 +61,11 @@ const AddItem = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
     await axios
-      .post(`http://127.0.0.1:8000/api/items`, formData)
+      .post(`http://127.0.0.1:8000/api/items`, formData, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
       .then(navigate("/items"))
       .catch(({ response }) => {
         if (response.status === 422) {

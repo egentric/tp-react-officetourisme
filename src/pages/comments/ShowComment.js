@@ -28,10 +28,16 @@ const ShowComment = () => {
       });
   };
   const deleteShowComment = (id) => {
-    axios.delete(`http://localhost:8000/api/comments/${id}`).then(() => {
-      displayShowComment();
-      navigate(-1); // Navigation à la page précédente
-    });
+    axios
+      .delete(`http://localhost:8000/api/comments/${id}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then(() => {
+        displayShowComment();
+        navigate(-1); // Navigation à la page précédente
+      });
   };
   return (
     <div style={{ display: "flex" }}>

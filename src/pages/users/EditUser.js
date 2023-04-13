@@ -15,8 +15,28 @@ const EditUser = () => {
   const [email, setEmail] = useState("");
   const [role_id, setRole] = useState("");
   const [validationError, setValidationError] = useState({});
+
+  // On récupère l'id du user
+  const [userCo, setUserCo] = useState([]);
+  const [roleCo, setRoleCo] = useState([]);
+
+  const displayUser = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/api/current-user`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setUserCo(res.data);
+        setRoleCo(res.data.role_id);
+      });
+  };
+  // console.log(role);
+
   useEffect(() => {
     getUser();
+    displayUser();
   }, []);
 
   // GET - Récupère les valeurs de la fiche avec l'API
@@ -129,35 +149,37 @@ const EditUser = () => {
                             />
                           </Form.Group>
                         </Col>
-                        <Col>
-                          <Form.Group controlId="Role">
-                            <Form.Label>Role</Form.Label>
-                            <Form.Check
-                              type="switch"
-                              id="custom-switch-user"
-                              label="Utilisateur"
-                              value="2"
-                              checked={role_id === 2}
-                              onChange={(event) => {
-                                if (event.target.checked) {
-                                  setRole(2);
-                                }
-                              }}
-                            />
-                            <Form.Check
-                              type="switch"
-                              id="custom-switch-admin"
-                              label="Administrateur"
-                              value="1"
-                              checked={role_id === 1}
-                              onChange={(event) => {
-                                if (event.target.checked) {
-                                  setRole(1);
-                                }
-                              }}
-                            />
-                          </Form.Group>
-                        </Col>
+                        {roleCo === 1 && (
+                          <Col>
+                            <Form.Group controlId="Role">
+                              <Form.Label>Role</Form.Label>
+                              <Form.Check
+                                type="switch"
+                                id="custom-switch-user"
+                                label="Utilisateur"
+                                value="2"
+                                checked={role_id === 2}
+                                onChange={(event) => {
+                                  if (event.target.checked) {
+                                    setRole(2);
+                                  }
+                                }}
+                              />
+                              <Form.Check
+                                type="switch"
+                                id="custom-switch-admin"
+                                label="Administrateur"
+                                value="1"
+                                checked={role_id === 1}
+                                onChange={(event) => {
+                                  if (event.target.checked) {
+                                    setRole(1);
+                                  }
+                                }}
+                              />
+                            </Form.Group>
+                          </Col>
+                        )}
                       </Row>
 
                       <Button

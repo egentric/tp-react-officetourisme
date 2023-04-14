@@ -301,18 +301,6 @@ const AddSite = () => {
                         </Row>
                         <Row>
                           <Col>
-                            <Form.Group controlId="longitudeDegSite">
-                              <Form.Label>Longitude</Form.Label>
-                              <Form.Control
-                                type="text"
-                                value={longitudeDegSite}
-                                onChange={(event) => {
-                                  setLongitudeDegSite(event.target.value);
-                                }}
-                              />
-                            </Form.Group>
-                          </Col>
-                          <Col>
                             <Form.Group controlId="latitudeDegSite">
                               <Form.Label>Latitude</Form.Label>
                               <Form.Control
@@ -320,6 +308,18 @@ const AddSite = () => {
                                 value={latitudeDegSite}
                                 onChange={(event) => {
                                   setLatitudeDegSite(event.target.value);
+                                }}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col>
+                            <Form.Group controlId="longitudeDegSite">
+                              <Form.Label>Longitude</Form.Label>
+                              <Form.Control
+                                type="text"
+                                value={longitudeDegSite}
+                                onChange={(event) => {
+                                  setLongitudeDegSite(event.target.value);
                                 }}
                               />
                             </Form.Group>

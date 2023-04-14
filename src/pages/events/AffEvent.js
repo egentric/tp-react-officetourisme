@@ -7,6 +7,7 @@ import Row from "react-bootstrap/esm/Row";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 const AffEvent = () => {
   const { event } = useParams();
@@ -98,6 +99,7 @@ const AffEvent = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

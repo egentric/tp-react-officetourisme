@@ -123,7 +123,7 @@ const EditSite = () => {
               <div className="col-12 col-sm-12 col-md-12">
                 <div className="card">
                   <div className="card-body">
-                    <h4 className="card-title">Création d'un nouveau Site</h4>
+                    <h4 className="card-title">Modification d'un Site</h4>
                     <hr />
                     <div className="form-wrapper">
                       {Object.keys(validationError).length > 0 && (
@@ -307,18 +307,6 @@ const EditSite = () => {
                         </Row>
                         <Row>
                           <Col>
-                            <Form.Group controlId="longitudeDegSite">
-                              <Form.Label>Longitude</Form.Label>
-                              <Form.Control
-                                type="text"
-                                value={longitudeDegSite}
-                                onChange={(event) => {
-                                  setLongitudeDegSite(event.target.value);
-                                }}
-                              />
-                            </Form.Group>
-                          </Col>
-                          <Col>
                             <Form.Group controlId="latitudeDegSite">
                               <Form.Label>Latitude</Form.Label>
                               <Form.Control
@@ -326,6 +314,18 @@ const EditSite = () => {
                                 value={latitudeDegSite}
                                 onChange={(event) => {
                                   setLatitudeDegSite(event.target.value);
+                                }}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col>
+                            <Form.Group controlId="longitudeDegSite">
+                              <Form.Label>Longitude</Form.Label>
+                              <Form.Control
+                                type="text"
+                                value={longitudeDegSite}
+                                onChange={(event) => {
+                                  setLongitudeDegSite(event.target.value);
                                 }}
                               />
                             </Form.Group>

@@ -70,7 +70,7 @@ const Sidebar = () => {
           <CDBSidebarMenu>
             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-md-start">
               <li className="nav-item">
-                <NavLink exact to="/dashboard" className="link">
+                <NavLink exact to={`/dashboard/${userId}`} className="link">
                   {/* <CDBSidebarMenuItem> */}
                   <svg
                     className="px-0 ms-4"

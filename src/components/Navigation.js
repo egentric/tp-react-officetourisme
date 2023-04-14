@@ -11,10 +11,25 @@ const Navigation = ({ onSelect }) => {
   const navigate = useNavigate();
   const [types, setTypes] = useState([]);
   const [isConnected, setIsConnected] = useState(false); // initialiser isConnected à false
+  // On récupère l'id du user
+  const [userId, setUserId] = useState("");
+
+  const displayUsers = async () => {
+    await axios
+      .get(`http://127.0.0.1:8000/api/current-user`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        setUserId(res.data.id);
+      });
+  };
 
   // console.log(isConnected);
   useEffect(() => {
     displayTypes();
+    displayUsers();
   }, []);
   // Sans les crochets ça tourne en boucle
 
@@ -48,7 +63,7 @@ const Navigation = ({ onSelect }) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {isConnected && (
-              <Nav.Link href="/dashboard" className="navLink">
+              <Nav.Link href={`/dashboard/${userId}`} className="navLink">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

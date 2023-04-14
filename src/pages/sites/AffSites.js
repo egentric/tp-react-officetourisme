@@ -7,7 +7,8 @@ import Row from "react-bootstrap/esm/Row";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import MapG from "../../components/Map";
+import MapG from "../../components/MapG";
+import Footer from "../../components/Footer";
 
 const AffSites = () => {
   const { type } = useParams();
@@ -25,7 +26,7 @@ const AffSites = () => {
       .get(`http://localhost:8000/api/sites/type/${type}`)
       .then((res) => {
         setAffSites(res.data);
-        console.log(affSites);
+        // console.log(affSites);
 
         // console.log(res.data);
         // console.log(setImage);
@@ -50,62 +51,66 @@ const AffSites = () => {
   //   );
 
   return (
-    <div style={{ display: "flex" }}>
+    <div>
       <Navigation />
-      {/* <MapG /> */}
-      <div style={{ flex: "1", display: "inline-flex" }}>
-        <div className="container mt-5">
-          <Row className="mt-5">
-            <h2 className="mb-4">{selectedType.nameType}</h2>
-          </Row>
-          <Row style={{ justifyContent: "center" }}>
-            {affSites.map((affSite) => (
-              <div className="col-4 col-sm-12 col-md-4 mb-4">
-                <Card>
-                  <Card.Img
-                    variant="top"
-                    src={`http://localhost:8000/storage/uploads/sites/${affSite.pictureSite}`}
-                    style={{
-                      maxHeight: "220px",
-                      maxWidth: "100%",
-                      display: "block",
-                      margin: "0 auto",
-                      width: "auto",
-                      height: "100%",
-                    }}
-                    alt={affSite.pictureSite}
-                  />
-
-                  <Card.Body>
-                    <Card.Title>{affSite.nameSite}</Card.Title>
-                    <Card.Text
-                      className="cardtexte"
+      <MapG />
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: "1", display: "inline-flex" }}>
+          <div className="container mt-5">
+            <div className="mt-5"></div>
+            <Row className="mt-5">
+              <h2 className="mb-4">{selectedType.nameType}</h2>
+            </Row>
+            <Row style={{ justifyContent: "center" }}>
+              {affSites.map((affSite) => (
+                <div className="col-4 col-sm-12 col-md-4 mb-4">
+                  <Card>
+                    <Card.Img
+                      variant="top"
+                      src={`http://localhost:8000/storage/uploads/sites/${affSite.pictureSite}`}
                       style={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
+                        maxHeight: "220px",
+                        maxWidth: "100%",
+                        display: "block",
+                        margin: "0 auto",
+                        width: "auto",
+                        height: "100%",
                       }}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: affSite.descriptionSite,
+                      alt={affSite.pictureSite}
+                    />
+
+                    <Card.Body>
+                      <Card.Title>{affSite.nameSite}</Card.Title>
+                      <Card.Text
+                        className="cardtexte"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
                         }}
-                      />
-                    </Card.Text>
-                    <Link
-                      to={`/sites/aff/${affSite.id}`}
-                      className="btn btn-2 btn-sm me-2"
-                    >
-                      Lire la suite
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </div>
-            ))}
-          </Row>
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: affSite.descriptionSite,
+                          }}
+                        />
+                      </Card.Text>
+                      <Link
+                        to={`/sites/aff/${affSite.id}`}
+                        className="btn btn-2 btn-sm me-2"
+                      >
+                        Lire la suite
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                </div>
+              ))}
+            </Row>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

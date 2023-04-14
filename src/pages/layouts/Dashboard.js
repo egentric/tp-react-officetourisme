@@ -3,10 +3,11 @@ import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 
 const Dashboard = () => {
+  const { user } = useParams();
   const [types, setTypes] = useState([]);
   const [events, setEvents] = useState([]);
   const [items, setItems] = useState([]);
@@ -14,10 +15,12 @@ const Dashboard = () => {
   const [sites, setSites] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [showUser, setShowUser] = useState("");
+
   const [commentsUser, setCommentsUser] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // On récupère l'id du user
-  const [user, setUser] = useState([]);
   const [role, setRole] = useState([]);
 
   const displayUser = async () => {
@@ -28,32 +31,17 @@ const Dashboard = () => {
         },
       })
       .then((res) => {
-        setUser(res.data);
         setRole(res.data.role_id);
       });
   };
-  // console.log(role);
 
-  useEffect(() => {
-    displayTypes();
-    displayEvents();
-    displayItems();
-    displayComments();
-    displaySites();
-    displayContacts();
-    displayUsers();
-    displayUser();
-    displayCommentsUser();
-  }, []);
-  // Sans les crochets ça tourne en boucle
-
-  const displayTypes = async () => {
+  async function displayTypes() {
     await axios.get("http://localhost:8000/api/types").then((res) => {
       const allTypes = res.data.data;
       const lastThreeTypes = allTypes.slice(-3);
       setTypes(lastThreeTypes);
     });
-  };
+  }
 
   const displayEvents = async () => {
     await axios.get("http://localhost:8000/api/events").then((res) => {
@@ -110,9 +98,30 @@ const Dashboard = () => {
         setUsers(lastThreeUsers);
       });
   };
-  const displayCommentsUser = async () => {
+
+  const displayShowUser = async () => {
     await axios
-      .get(`http://127.0.0.1:8000/api/comments/user/${user.id}`, {
+      .get(`http://localhost:8000/api/users/${user}`, {
+        headers: {
+          Authorization: "Bearer" + localStorage.getItem("access_token"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        // console.log("test");
+
+        setShowUser(res.data.data);
+        // console.log(showUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const displayCommentsUser = async () => {
+    setIsLoading(true);
+    const response = await axios
+      .get(`http://127.0.0.1:8000/api/comments/user/${user}`, {
         headers: {
           Authorization: "Bearer" + localStorage.getItem("access_token"),
         },
@@ -121,6 +130,26 @@ const Dashboard = () => {
         setCommentsUser(res.data.data);
       });
   };
+  // console.log(commentsUser);
+
+  useEffect(() => {
+    displayUser();
+    displayTypes();
+    displayEvents();
+    displayItems();
+    displayComments();
+    displaySites();
+    displayContacts();
+    displayShowUser();
+    displayUsers();
+    displayCommentsUser();
+
+    // setIsLoading(true);
+    // fetchComUser().then((data) => {
+    //   setCommentsUser(data);
+    //   setIsLoading(false);
+    // });
+  }, []);
 
   return (
     <div style={{ display: "flex" }}>
@@ -330,44 +359,49 @@ const Dashboard = () => {
             </Row>
           </div>
         )}
-        {/* ========================================================================================================================================== */}
+        {/* =====================================DASHBOARD USER===================================================================================================== */}
         {role === 2 && (
           <div className="container mt-5">
             <Row>
               {/* =======================COMMENTS USER======================= */}
+
               <div className="col-8 col-sm-12 col-md-8 ">
-                <Link
-                  exact
-                  to={`/comments/user/${user.id}`}
-                  className="cardlink"
-                >
-                  <div className="card">
-                    <div className="card-body">
-                      <h4 className="card-title">Commentaires</h4>
-                      <hr />
-                      <Table striped bordered hover>
-                        <thead>
-                          <tr>
-                            <th>Titres</th>
-                            <th>De l'articles</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {commentsUser.map((comment) => (
-                            <tr key={comment.id}>
-                              <td>{comment.titleComment}</td>
-                              <td>{comment.titleItem}</td>
+                {isLoading ? (
+                  <Link
+                    exact
+                    to={`/comments/user/${user.id}`}
+                    className="cardlink"
+                  >
+                    <div className="card">
+                      <div className="card-body">
+                        <h4 className="card-title">Commentaires</h4>
+                        <hr />
+                        <Table striped bordered hover>
+                          <thead>
+                            <tr>
+                              <th>Titres</th>
+                              <th>De l'articles</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </Table>
+                          </thead>
+                          <tbody>
+                            {commentsUser.map((comment) => (
+                              <tr key={comment.id}>
+                                <td>{comment.titleComment}</td>
+                                <td>{comment.titleItem}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                ) : (
+                  "En cours de chargement"
+                )}
               </div>
               {/* =======================Utilisateur======================= */}
               <div className="col-4 col-sm-12 col-md-4">
-                <Link exact to={`/users/show/${user.id}`} className="cardlink">
+                <Link exact to={`/users/show/${user}`} className="cardlink">
                   <div className="card">
                     <div className="card-body">
                       <h4 className="card-title">Mon Compte</h4>
@@ -381,8 +415,8 @@ const Dashboard = () => {
                         </thead>
                         <tbody>
                           <tr>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
+                            <td>{showUser.firstName}</td>
+                            <td>{showUser.lastName}</td>
                           </tr>
                         </tbody>
                       </Table>

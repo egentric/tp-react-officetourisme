@@ -26,11 +26,6 @@ h2 {
   font-size: 4rem !important;
 }
 
-.vert {
-  color: #72A200;
-  font-weight: bold;
-}
-
 .listeSite {
   list-style: circle;
 }
@@ -60,36 +55,6 @@ h2 {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-}
-
-li {
-  margin-bottom: 15px;
-}
-li svg {
-  color: #72A200;
-}
-li .contact {
-  margin-left: 15px !important;
-}
-li .contact2 {
-  margin-left: 32px !important;
-}
-
-.register {
-  margin-top: 10px;
-  text-decoration: none;
-}
-
-.register {
-  padding-top: 10px;
-  text-decoration: none;
-  color: #118398;
-}
-
-.register:hover {
-  transition: 0.5s;
-  text-decoration: underline;
-  color: #72A200;
 }
 
 .img {
@@ -243,4 +208,69 @@ thead {
 .btn-2:hover {
   transition: 0.3s !important;
   background-color: #72A200 !important;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: rgb(243, 243, 243);
+}
+
+thead {
+  background-color: rgb(243, 243, 243);
+}
+
+.fond {
+  background-color: #4d4d4d;
+  margin-top: 10px;
+  padding: 2px;
+  color: #e5e5e5;
+  font-size: 0.6rem;
+  text-align: center;
+}
+
+.vert {
+  color: #72A200;
+  font-weight: bold;
+}
+
+li {
+  margin-bottom: 15px;
+}
+li svg {
+  color: #72A200;
+}
+li .contact {
+  margin-left: 15px !important;
+}
+li .contact2 {
+  margin-left: 32px !important;
+}
+
+.noaccess {
+  padding-top: 10px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+.access {
+  text-decoration: none;
+  color: #118398;
+}
+
+.access:hover {
+  transition: 0.5s;
+  text-decoration: underline;
+  color: #72A200;
+}
+
+.register {
+  padding-top: 10px;
+  text-decoration: none;
+  color: #118398;
+}
+
+.register:hover {
+  transition: 0.5s;
+  text-decoration: underline;
+  color: #72A200;
 }/*# sourceMappingURL=index.css.map */

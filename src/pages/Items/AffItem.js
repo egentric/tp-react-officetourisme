@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import CommentForm from "../../components/CommentForm";
+import Footer from "../../components/Footer";
 
 const AffItem = () => {
   const { item } = useParams();
@@ -121,6 +122,7 @@ const AffItem = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

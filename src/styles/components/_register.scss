@@ -1,0 +1,11 @@
+.register {
+    padding-top: 10px;
+    text-decoration: none;
+    color: $color-1;
+}
+
+.register:hover {
+    transition: 0.5s;
+    text-decoration: underline;
+    color: $color-4;
+}

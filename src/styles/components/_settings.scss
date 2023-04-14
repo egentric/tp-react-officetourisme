@@ -46,11 +46,6 @@ h2 {
     font-size: 4rem !important;
 }
 
-.vert {
-    color: $color-4;
-    font-weight: bold;
-}
-
 .listeSite {
     list-style: circle;
 }
@@ -78,42 +73,6 @@ h2 {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-}
-
-li {
-    margin-bottom: 15px;
-
-    svg {
-        color: $color-4;
-    }
-
-    .contact {
-        margin-left: 15px !important;
-
-    }
-
-    .contact2 {
-        margin-left: 32px !important;
-
-    }
-
-}
-
-.register {
-    margin-top: 10px;
-    text-decoration: none;
-}
-
-.register {
-    padding-top: 10px;
-    text-decoration: none;
-    color: $color-1;
-}
-
-.register:hover {
-    transition: 0.5s;
-    text-decoration: underline;
-    color: $color-4;
 }
 
 .img {

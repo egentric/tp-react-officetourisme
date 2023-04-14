@@ -1,11 +1,11 @@
 import React from "react";
-import Navigation from "../../components/Navigation";
+// import Navigation from "../../components/Navigation";
 import LoginForm from "../../components/auth/LoginForm";
 
 const Login = () => {
   return (
     <div>
-      <Navigation />
+      {/* <Navigation /> */}
       <LoginForm />
     </div>
   );

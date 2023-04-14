@@ -7,6 +7,7 @@ import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/Button";
 
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 const AffItems = () => {
   const [items, setItems] = useState([]);
@@ -90,6 +91,7 @@ const AffItems = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

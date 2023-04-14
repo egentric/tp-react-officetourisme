@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
 
 const AddContact = () => {
   const navigate = useNavigate();
@@ -47,9 +48,9 @@ const AddContact = () => {
 
       <div className="container mt-5">
         <div className="row justify-content-center">
-          <div className="col-12 col-sm-12 col-md-6 mt-5">
+          <div className="col-12 col-sm-12 col-md-6 mt-2">
             <Row>
-              <h2 className="mb-4 mt-2">Contactez-nous</h2>
+              <h2 className="mb-4">Contactez-nous</h2>
             </Row>
             <div className="card">
               <div className="card-body">
@@ -131,6 +132,7 @@ const AddContact = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

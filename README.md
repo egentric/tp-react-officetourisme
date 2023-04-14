@@ -1,77 +1,51 @@
 <h5>React Office de Tourisme</h5>
 <p>
     <ul>
-        <li>home</li>
-        - Carroussel bootstrap<br />
-        - Affichages de 3 card<br />
+        <b>
+            <li>home</li>
+        </b>
 
-        <li>items</li>
-        - Affichage card<br />
-        - Ajout de commentaires<br />
-        - CKEditor<br />
+        <li>Carroussel bootstrap</li>
+        <li>Affichages de 3 card</li>
 
-        <li>Events</li>
-        - Sites lié à l'Event<br />
-        - CKEditor<br />
-        - checkbox sit<h5>React Office de Tourisme</h5>
-<p>
-    <ul>
-        <li>home</li>
-    </ul>
-    - Carroussel bootstrap<br />
-    - Affichages de 3 card<br />
-    <ul>
-        <li>items</li>
-    </ul>
-    - Affichage card<br />
-    - Ajout de commentaires<br />
-    - CKEditor<br />
-    <ul>
-        <li>Events</li>
-    </ul>
-    - Sites lié à l'Event<br />
-    - CKEditor<br />
-    - checkbox sites<br />
-    <ul>
-        <li>Sites</li>
-    </ul>
-    - Menu déroulant des sites<br />
-    - OpenStreetMap sur sites selon type<br />
-    - OpenStreetMap sur un site<br />
-    - CKEditor<br />
-    - select type<br />
-    <ul>
-        <li>Users</li>
-    </ul>
-    - Role Check Switch<br />
-    <ul>
-        <li>Dashboard</li>
-    </ul>
-    - Affichage selon Role<br />
-    - Affichage seulement des commentaires de l'user<br />
-    <ul>
-        <li>Authentification Token</li>
-        <li>Requète protégée par token</li>
-        <li>Routes restriction selon Role</li>
-        <li>current-user -> récupération donnée user connecté</li>
-        <li>Gestion Many to many et many to one</li>
-    </ul>
-</p>es<br />
+        <b>
+            <li>items</li>
+        </b>
 
-        <li>Sites</li>
-        - Menu déroulant des sites<br />
-        - OpenStreetMap sur sites selon type<br />
-        - OpenStreetMap sur un site<br />
-        - CKEditor<br />
-        - select type<br />
+        <li>Affichage card</li>
+        <li>Ajout de commentaires</li>
+        <li>CKEditor</li>
 
-        <li>Users</li>
-        - Role Check Switch<br />
+        <b>
+            <li>Events</li>
+        </b>
 
-        <li>Dashboard</li>
-        - Affichage selon Role<br />
-        - Affichage seulement des commentaires de l'user<br />
+        <li>Sites lié à l'Event</li>
+        <li>CKEditor</li>
+        <li>checkbox sites</li>
 
+        <b>
+            <li>Sites</li>
+        </b>
+
+        <li>Menu déroulant des sites</li>
+        <li>OpenStreetMap sur sites selon type</li>
+        <li>OpenStreetMap sur un site</li>
+        <li>CKEditor</li>
+        <li>select type</li>
+
+        <b>
+            <li>Users</li>
+        </b>
+        <li>Role Check Switch</li>
+
+        <b>
+            <li>Dashboard</li>
+        </b>
+
+        <li>Affichage selon Role</li>
+        <li>Affichage seulement des commentaires de l'user</li>
+        </br>
         <li>Authentification Token</li>
         <li>Requète protégée par token</li>
         <li>Routes restriction selon Role</li>

@@ -7,40 +7,38 @@
 
         
      <li>items</li>
-        <ul>
-          <li>Affichage card</li>
-          <li>Ajout de commentaires</li>
-          <li>CKEditor</li>
-         </ul>
-         
+
+          - Affichage card<br/>
+          - Ajout de commentaires<br/>
+          - CKEditor<br/>
+
         <li>Events</li>
-        <ul>
-          <li>Sites lié à l'Event</li>
-          <li>CKEditor</li>
-          <li>checkbox sites</li>
-         </ul>   
+       
+- Sites lié à l'Event<br/>
+         - CKEditor<br/>
+        - checkbox sites<br/>
+  
          
          <li>Sites</li>
-        <ul>
-          <li>Menu déroulant des sites</li>
-          <li>OpenStreetMap sur sites selon type</li>
-          <li>OpenStreetMap sur un site</li>
-          <li>CKEditor</li>
-          <li>select type</li>
-         </ul>   
+
+          - Menu déroulant des sites<br/>
+          - OpenStreetMap sur sites selon type<br/>
+          - OpenStreetMap sur un site<br/>
+          - CKEditor<br/>
+          - select type<br/>
+
          
        <li>Users</li>
-        <ul>
-          <li>Role Check Switch</li>
-         </ul>
+- Role Check Switch<br/>
+
          
         <li>Dashboard</li>
-        <ul>
-          <li>Affichage selon Role</li>
-          <li>Affichage seulement des commentaires de l'user/li>
-         </ul>  
+
+          - Affichage selon Role<br/>
+          - Affichage seulement des commentaires de l'user<br/>
+ 
         <li>Authentification Token</li>
-        <li>Requète protégée par token</li
+        <li>Requète protégée par token</li>
         <li>Routes restriction selon Role</li>
         <li>current-user -> récupération donnée user connecté</li>
 <li>Gestion Many to many et many to one</li>

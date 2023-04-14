@@ -2,10 +2,9 @@
 <p>
     <ul>
     <li>home</li>
-      <ul>
-          <li>Carroussel bootstrap</li>
-          <li>Affichages de 3 card</li>
-        </ul>
+      - Carroussel bootstrap<br/>
+          - Affichages de 3 card<br/>
+
         
      <li>items</li>
         <ul>
